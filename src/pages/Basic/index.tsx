@@ -1,19 +1,19 @@
 import React from 'react';
-import { ReactDialogic, DialogueNode } from 'react-dialogic';
+import { ReactDialogic, SequenceItem } from 'react-dialogic';
 import { characters, dialogue } from './config';
 
 function BasicExample() {
   // 事件處理函數
-  const handleMessageStart = (dialogueNode: DialogueNode) => {
-    console.log('對話開始:', dialogueNode);
+  const handleMessageStart = (item: SequenceItem) => {
+    console.log('對話開始:', item);
   };
   
-  const handleMessage = (dialogueNode: DialogueNode) => {
-    console.log('對話進行中:', dialogueNode);
+  const handleMessage = (item: SequenceItem) => {
+    console.log('對話進行中:', item);
   };
   
-  const handleMessageEnd = (dialogueNode: DialogueNode) => {
-    console.log('對話結束:', dialogueNode);
+  const handleMessageEnd = (item: SequenceItem) => {
+    console.log('對話結束:', item);
   };
 
   return (
@@ -21,7 +21,7 @@ function BasicExample() {
       <ReactDialogic 
         characters={characters}
         dialogue={dialogue}
-        startNode="start"
+        startScene="mountain"
         onMessageStart={handleMessageStart}
         onMessage={handleMessage}
         onMessageEnd={handleMessageEnd}
