@@ -20,10 +20,6 @@ interface DialogProviderProps {
    */
   startNode?: string;
   /**
-   * 主題名稱
-   */
-  theme?: string;
-  /**
    * 對話開始的回調
    */
   onMessageStart?: (node: DialogueNode) => void;
@@ -45,7 +41,6 @@ export const DialogProvider: React.FC<DialogProviderProps> = ({
   characters,
   dialogue,
   startNode,
-  theme = 'gameClassic',
   onMessageStart,
   onMessage,
   onMessageEnd

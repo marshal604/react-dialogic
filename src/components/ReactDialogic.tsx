@@ -17,10 +17,6 @@ export interface ReactDialogicProps {
    */
   startNode: string;
   /**
-   * 主題名稱
-   */
-  theme?: string;
-  /**
    * 對話開始的回調
    */
   onMessageStart?: (node: DialogueNode) => void;
@@ -42,7 +38,6 @@ export const ReactDialogic: React.FC<ReactDialogicProps> = ({
   characters,
   dialogue,
   startNode,
-  theme = 'gameClassic',
   onMessageStart,
   onMessage,
   onMessageEnd
@@ -52,7 +47,6 @@ export const ReactDialogic: React.FC<ReactDialogicProps> = ({
       characters={characters}
       dialogue={dialogue}
       startNode={startNode}
-      theme={theme}
       onMessageStart={onMessageStart}
       onMessage={onMessage}
       onMessageEnd={onMessageEnd}
