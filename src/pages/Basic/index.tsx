@@ -1,5 +1,5 @@
 import React from 'react';
-import { DialogSystem, DialogProvider, DialogueNode } from 'react-dialogic';
+import { ReactDialogic, DialogueNode } from 'react-dialogic';
 import { characters, dialogue } from './config';
 
 function BasicExample() {
@@ -18,17 +18,14 @@ function BasicExample() {
 
   return (
     <div className="app">
-      <DialogProvider 
-        theme="gameClassic"
+      <ReactDialogic 
         characters={characters}
         dialogue={dialogue}
         startNode="start"
         onMessageStart={handleMessageStart}
         onMessage={handleMessage}
         onMessageEnd={handleMessageEnd}
-      >
-        <DialogSystem characters={characters} dialogue={dialogue} startNode="start" />
-      </DialogProvider>
+      />
     </div>
   );
 }
