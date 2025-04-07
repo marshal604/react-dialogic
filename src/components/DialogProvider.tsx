@@ -51,15 +51,15 @@ export const DialogProvider: React.FC<DialogProviderProps> = ({
   onMessageEnd
 }) => {
   return (
-      <DialogContextProvider
-        characters={characters}
-        dialogue={dialogue}
-        startNode={startNode}
-        onMessageStart={onMessageStart}
-        onMessage={onMessage}
-        onMessageEnd={onMessageEnd}
-      >
-        {children}
-      </DialogContextProvider>
+    <DialogContextProvider
+      characters={characters}
+      dialogue={dialogue}
+      startNode={startNode}
+      onMessageStart={onMessageStart}
+      onMessage={onMessage}
+      onMessageEnd={onMessageEnd}
+    >
+      {children}
+    </DialogContextProvider>
   );
 }; 
