@@ -11,23 +11,23 @@ export interface Choice {
    */
   icon?: string;
   /**
-   * 選擇後跳轉的對話節點ID
+   * 選擇後跳轉的場景ID
    */
   next: string;
 }
 
 /**
- * 對話節點類型定義
+ * 序列中的單個項目
  */
-export interface DialogueNode {
+export interface SequenceItem {
   /**
    * 對話文本內容
    */
   text: string;
   /**
-   * 說話角色的ID
+   * 說話角色的ID（不設置則為旁白）
    */
-  character: string;
+  speaker?: string;
   /**
    * 角色情緒/表情
    */
@@ -37,13 +37,9 @@ export interface DialogueNode {
    */
   position?: 'left' | 'right' | 'center';
   /**
-   * 背景圖片路徑
+   * 背景圖片路徑（可在序列中途變更）
    */
   background?: string;
-  /**
-   * 下一個對話節點ID
-   */
-  next?: string;
   /**
    * 對話選項列表
    */
@@ -59,11 +55,40 @@ export interface DialogueNode {
 }
 
 /**
+ * 場景定義
+ */
+export interface Scene {
+  /**
+   * 場景背景圖片
+   */
+  background: string;
+  /**
+   * 對話序列
+   */
+  sequence: SequenceItem[];
+}
+
+/**
  * 對話系統配置
  */
 export interface DialogueConfig {
   /**
-   * 所有對話節點的集合
+   * 所有場景的集合
    */
-  [key: string]: DialogueNode;
+  [key: string]: Scene;
+}
+
+/**
+ * 向下兼容的對話節點類型定義（保留用於類型兼容）
+ */
+export interface DialogueNode {
+  text: string;
+  character: string;
+  emotion?: string;
+  position?: 'left' | 'right' | 'center';
+  background?: string;
+  next?: string;
+  choices?: Choice[];
+  sound?: string;
+  style?: Record<string, any>;
 } 

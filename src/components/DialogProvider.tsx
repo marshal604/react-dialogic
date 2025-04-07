@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import { DialogContextProvider } from '../context/DialogContext';
-import { DialogueConfig, CharacterConfig, DialogueNode } from '../types';
+import { DialogueConfig, CharacterConfig, SequenceItem } from '../types';
 
 interface DialogProviderProps {
   /**
@@ -16,21 +16,21 @@ interface DialogProviderProps {
    */
   dialogue: DialogueConfig;
   /**
-   * 起始對話節點
+   * 起始場景
    */
-  startNode?: string;
+  startScene?: string;
   /**
    * 對話開始的回調
    */
-  onMessageStart?: (node: DialogueNode) => void;
+  onMessageStart?: (item: SequenceItem) => void;
   /**
-   * 對話節點結束的回調
+   * 對話項結束的回調
    */
-  onMessage?: (node: DialogueNode) => void;
+  onMessage?: (item: SequenceItem) => void;
   /**
    * 對話流結束的回調
    */
-  onMessageEnd?: (node: DialogueNode) => void;
+  onMessageEnd?: (item: SequenceItem) => void;
 }
 
 /**
@@ -40,7 +40,7 @@ export const DialogProvider: React.FC<DialogProviderProps> = ({
   children,
   characters,
   dialogue,
-  startNode,
+  startScene,
   onMessageStart,
   onMessage,
   onMessageEnd
@@ -49,7 +49,7 @@ export const DialogProvider: React.FC<DialogProviderProps> = ({
     <DialogContextProvider
       characters={characters}
       dialogue={dialogue}
-      startNode={startNode}
+      startScene={startScene}
       onMessageStart={onMessageStart}
       onMessage={onMessage}
       onMessageEnd={onMessageEnd}

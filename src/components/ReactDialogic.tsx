@@ -1,7 +1,7 @@
 import React from 'react';
 import { DialogProvider } from './DialogProvider';
 import { DialogSystem } from './DialogSystem';
-import { DialogueConfig, CharacterConfig, DialogueNode } from '../types';
+import { DialogueConfig, CharacterConfig, SequenceItem } from '../types';
 
 export interface ReactDialogicProps {
   /**
@@ -13,31 +13,31 @@ export interface ReactDialogicProps {
    */
   dialogue: DialogueConfig;
   /**
-   * 起始對話節點
+   * 起始場景
    */
-  startNode: string;
+  startScene: string;
   /**
    * 對話開始的回調
    */
-  onMessageStart?: (node: DialogueNode) => void;
+  onMessageStart?: (item: SequenceItem) => void;
   /**
-   * 對話節點結束的回調
+   * 對話項結束的回調
    */
-  onMessage?: (node: DialogueNode) => void;
+  onMessage?: (item: SequenceItem) => void;
   /**
    * 對話流結束的回調
    */
-  onMessageEnd?: (node: DialogueNode) => void;
+  onMessageEnd?: (item: SequenceItem) => void;
 }
 
 /**
  * React Dialogic 統一入口組件
  * 將 DialogProvider 和 DialogSystem 封裝在一起，提供更簡單的使用方式
  */
-export const ReactDialogic: React.FC<ReactDialogicProps> = ({
+const ReactDialogic: React.FC<ReactDialogicProps> = ({
   characters,
   dialogue,
-  startNode,
+  startScene,
   onMessageStart,
   onMessage,
   onMessageEnd
@@ -46,7 +46,7 @@ export const ReactDialogic: React.FC<ReactDialogicProps> = ({
     <DialogProvider
       characters={characters}
       dialogue={dialogue}
-      startNode={startNode}
+      startScene={startScene}
       onMessageStart={onMessageStart}
       onMessage={onMessage}
       onMessageEnd={onMessageEnd}
@@ -55,3 +55,5 @@ export const ReactDialogic: React.FC<ReactDialogicProps> = ({
     </DialogProvider>
   );
 };
+
+export default ReactDialogic;

@@ -10,41 +10,48 @@ import { useDialog } from '../context/DialogContext';
  */
 export const DialogSystem: React.FC = () => {
   const {
-    currentNode,
+    getCurrentItem,
+    getCurrentScene,
     handleNext,
     handleChoiceSelect,
-    dialogue,
     characters,
     onMessageStart,
     onMessage,
     onMessageEnd
   } = useDialog();
 
-  // 如果沒有當前節點或無效的節點ID，則不渲染
-  if (!currentNode || !dialogue[currentNode]) {
+  // 獲取當前場景和當前對話項
+  const currentScene = getCurrentScene();
+  const currentItem = getCurrentItem();
+
+  // 如果沒有當前場景或對話項，則不渲染
+  if (!currentScene || !currentItem) {
     return null;
   }
 
-  const currentDialogue = dialogue[currentNode];
-  const character = characters[currentDialogue.character];
+  // 獲取背景（優先使用當前對話項的背景，其次使用場景背景）
+  const backgroundSrc = currentItem.background || currentScene.background;
+
+  // 獲取角色（如果對話項有指定角色的話）
+  const character = currentItem.speaker ? characters[currentItem.speaker] : null;
 
   const onNext = () => {
     handleNext();
-    if (onMessageEnd) onMessageEnd(currentDialogue);
+    if (onMessageEnd) onMessageEnd(currentItem);
   };
 
   return (
     <div className="dialogic-container fixed inset-0 flex flex-col justify-end overflow-hidden z-50" style={{ userSelect: 'none' }}>
       {/* 背景 */}
-      <Background src={currentDialogue.background} />
+      <Background src={backgroundSrc} />
 
       {/* 角色 */}
       <div className="dialogic-characters-container relative w-full flex-1">
         {character && (
           <Character
             config={character}
-            emotion={currentDialogue.emotion}
-            position={currentDialogue.position || character.defaultPosition}
+            emotion={currentItem.emotion}
+            position={currentItem.position || character.defaultPosition}
             active={true}
           />
         )}
@@ -54,18 +61,18 @@ export const DialogSystem: React.FC = () => {
       <div className="dialogic-controls-container w-full max-w-5xl mx-auto mb-8 px-4">
         <DialogBox
           name={character?.name}
-          text={currentDialogue.text}
+          text={currentItem.text}
           textColor={character?.textColor}
           onNext={onNext}
           onTypingComplete={() => {
-            if (onMessage) onMessage(currentDialogue);
+            if (onMessage) onMessage(currentItem);
           }}
         />
 
         {/* 選項 */}
-        {currentDialogue.choices && (
+        {currentItem.choices && (
           <ChoiceMenu
-            choices={currentDialogue.choices}
+            choices={currentItem.choices}
             onSelect={handleChoiceSelect}
           />
         )}

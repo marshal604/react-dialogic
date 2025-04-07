@@ -1,25 +1,31 @@
 import React, { createContext, useContext, useState, useCallback, ReactNode } from 'react';
-import { DialogueNode, DialogueConfig, CharacterConfig } from '../types';
+import { SequenceItem, DialogueConfig, CharacterConfig, Scene } from '../types';
 
 interface DialogContextType {
-  currentNode: string | null;
+  currentScene: string | null;
+  currentIndex: number;
   dialogue: DialogueConfig;
   characters: Record<string, CharacterConfig>;
-  setCurrentNode: (nodeId: string) => void;
+  setCurrentScene: (sceneId: string) => void;
   handleNext: () => void;
   handleChoiceSelect: (next: string) => void;
-  onMessageStart?: (node: DialogueNode) => void;
-  onMessage?: (node: DialogueNode) => void;
-  onMessageEnd?: (node: DialogueNode) => void;
+  getCurrentItem: () => SequenceItem | null;
+  getCurrentScene: () => Scene | null;
+  onMessageStart?: (item: SequenceItem) => void;
+  onMessage?: (item: SequenceItem) => void;
+  onMessageEnd?: (item: SequenceItem) => void;
 }
 
 const defaultContext: DialogContextType = {
-  currentNode: null,
+  currentScene: null,
+  currentIndex: 0,
   dialogue: {},
   characters: {},
-  setCurrentNode: () => {},
+  setCurrentScene: () => {},
   handleNext: () => {},
-  handleChoiceSelect: () => {}
+  handleChoiceSelect: () => {},
+  getCurrentItem: () => null,
+  getCurrentScene: () => null
 };
 
 const DialogContext = createContext<DialogContextType>(defaultContext);
@@ -28,10 +34,10 @@ interface DialogProviderProps {
   children: ReactNode;
   dialogue: DialogueConfig;
   characters: Record<string, CharacterConfig>;
-  startNode?: string;
-  onMessageStart?: (node: DialogueNode) => void;
-  onMessage?: (node: DialogueNode) => void;
-  onMessageEnd?: (node: DialogueNode) => void;
+  startScene?: string;
+  onMessageStart?: (item: SequenceItem) => void;
+  onMessage?: (item: SequenceItem) => void;
+  onMessageEnd?: (item: SequenceItem) => void;
 }
 
 /**
@@ -41,37 +47,56 @@ export const DialogContextProvider: React.FC<DialogProviderProps> = ({
   children,
   dialogue,
   characters,
-  startNode,
+  startScene,
   onMessageStart,
   onMessage,
   onMessageEnd
 }) => {
-  const [currentNode, setCurrentNode] = useState<string | null>(startNode || null);
+  const [currentScene, setCurrentScene] = useState<string | null>(startScene || null);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [isTypingComplete, setIsTypingComplete] = useState<boolean>(false);
 
-  // 當對話節點變化時觸發onMessageStart
-  const handleNodeChange = useCallback((nodeId: string) => {
-    setCurrentNode(nodeId);
+  // 獲取當前場景
+  const getCurrentScene = useCallback(() => {
+    if (!currentScene || !dialogue[currentScene]) return null;
+    return dialogue[currentScene];
+  }, [currentScene, dialogue]);
+
+  // 獲取當前對話項
+  const getCurrentItem = useCallback(() => {
+    const scene = getCurrentScene();
+    if (!scene || !scene.sequence || currentIndex >= scene.sequence.length) return null;
+    return scene.sequence[currentIndex];
+  }, [getCurrentScene, currentIndex]);
+
+  // 當對話項變化時觸發onMessageStart
+  const handleSequenceChange = useCallback((sceneId: string, index: number) => {
+    setCurrentScene(sceneId);
+    setCurrentIndex(index);
     setIsTypingComplete(false);
-    if (dialogue[nodeId] && onMessageStart) {
-      onMessageStart(dialogue[nodeId]);
+    
+    const scene = dialogue[sceneId];
+    if (scene && scene.sequence && scene.sequence[index] && onMessageStart) {
+      onMessageStart(scene.sequence[index]);
     }
   }, [dialogue, onMessageStart]);
 
   // 完成打字效果時觸發onMessage
   const handleTypingComplete = useCallback(() => {
     setIsTypingComplete(true);
-    if (currentNode && dialogue[currentNode] && onMessage) {
-      onMessage(dialogue[currentNode]);
+    const currentItem = getCurrentItem();
+    if (currentItem && onMessage) {
+      onMessage(currentItem);
     }
-  }, [currentNode, dialogue, onMessage]);
+  }, [getCurrentItem, onMessage]);
 
-  // 前進到下一個對話節點
+  // 前進到下一個對話項
   const handleNext = useCallback(() => {
-    if (!currentNode) return;
+    const scene = getCurrentScene();
+    if (!scene) return;
     
-    const node = dialogue[currentNode];
-    if (!node) return;
+    const currentItem = getCurrentItem();
+    if (!currentItem) return;
 
     // 如果打字效果未完成，則完成打字效果
     if (!isTypingComplete) {
@@ -79,30 +104,41 @@ export const DialogContextProvider: React.FC<DialogProviderProps> = ({
       return;
     }
 
-    // 如果有下一個節點，前進到該節點
-    if (node.next) {
-      handleNodeChange(node.next);
-    } 
-    // 如果沒有下一個節點，則對話結束
-    else if (onMessageEnd) {
-      onMessageEnd(node);
+    // 檢查是否有選項
+    if (currentItem.choices) {
+      // 有選項則等待用戶選擇，不自動前進
+      return;
     }
-  }, [currentNode, dialogue, isTypingComplete, handleTypingComplete, handleNodeChange, onMessageEnd]);
+
+    // 檢查是否是序列中的最後一項
+    if (currentIndex < scene.sequence.length - 1) {
+      // 移動到序列中的下一項
+      handleSequenceChange(currentScene!, currentIndex + 1);
+    } 
+    // 如果是序列的最後一項且沒有選項，則對話結束
+    else if (onMessageEnd) {
+      onMessageEnd(currentItem);
+    }
+  }, [currentScene, currentIndex, getCurrentScene, getCurrentItem, isTypingComplete, handleTypingComplete, handleSequenceChange, onMessageEnd]);
 
   // 選擇對話選項
   const handleChoiceSelect = useCallback((next: string) => {
-    handleNodeChange(next);
-  }, [handleNodeChange]);
+    // 跳轉到指定的場景
+    handleSequenceChange(next, 0);
+  }, [handleSequenceChange]);
 
   return (
     <DialogContext.Provider
       value={{
-        currentNode,
+        currentScene,
+        currentIndex,
         dialogue,
         characters,
-        setCurrentNode: handleNodeChange,
+        setCurrentScene: (sceneId: string) => handleSequenceChange(sceneId, 0),
         handleNext,
         handleChoiceSelect,
+        getCurrentItem,
+        getCurrentScene,
         onMessageStart,
         onMessage,
         onMessageEnd
