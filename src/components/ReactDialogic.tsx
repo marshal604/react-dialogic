@@ -34,7 +34,7 @@ export interface ReactDialogicProps {
  * React Dialogic 統一入口組件
  * 將 DialogProvider 和 DialogSystem 封裝在一起，提供更簡單的使用方式
  */
-const ReactDialogic: React.FC<ReactDialogicProps> = ({
+export const ReactDialogic: React.FC<ReactDialogicProps> = ({
   characters,
   dialogue,
   startScene,
@@ -55,5 +55,3 @@ const ReactDialogic: React.FC<ReactDialogicProps> = ({
     </DialogProvider>
   );
 };
-
-export default ReactDialogic;
