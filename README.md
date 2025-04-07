@@ -1,49 +1,54 @@
-# React-Dialogic
+# React + TypeScript + Vite
 
-<p align="center">
-  <img src="https://img.shields.io/badge/version-0.1.0-blue.svg" alt="version">
-  <img src="https://img.shields.io/badge/license-MIT-green.svg" alt="license">
-</p>
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-<p align="center">一個專為 React 應用開發的對話系統 UI 套件<br>A dialogue system UI kit for React applications</p>
+Currently, two official plugins are available:
 
-<p align="center">
-  <a href="./README.zh-TW.md">繁體中文</a> | 
-  <a href="./README.en.md">English</a>
-</p>
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
----
+## Expanding the ESLint configuration
 
-![React-Dialogic Example](https://via.placeholder.com/800x400?text=React-Dialogic+Demo)
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-## 快速導航 / Quick Navigation
-
-- [安裝 / Installation](#安裝--installation)
-- [文檔 / Documentation](#文檔--documentation)
-- [示例 / Examples](#示例--examples)
-- [支持 / Support](#支持--support)
-
-## 安裝 / Installation
-
-```bash
-npm install react-dialogic
-# or
-yarn add react-dialogic
+```js
+export default tseslint.config({
+  extends: [
+    // Remove ...tseslint.configs.recommended and replace with this
+    ...tseslint.configs.recommendedTypeChecked,
+    // Alternatively, use this for stricter rules
+    ...tseslint.configs.strictTypeChecked,
+    // Optionally, add this for stylistic rules
+    ...tseslint.configs.stylisticTypeChecked,
+  ],
+  languageOptions: {
+    // other options...
+    parserOptions: {
+      project: ['./tsconfig.node.json', './tsconfig.app.json'],
+      tsconfigRootDir: import.meta.dirname,
+    },
+  },
+})
 ```
 
-## 文檔 / Documentation
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-- [中文文檔](./README.zh-TW.md)
-- [English Documentation](./README.en.md)
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-## 示例 / Examples
-
-查看 [examples](./examples) 目錄獲取完整示例。
-
-See the [examples](./examples) directory for complete examples.
-
-## 支持 / Support
-
-如有問題，請在 GitHub Issues 中提出。
-
-For issues and questions, please file a GitHub Issue. 
+export default tseslint.config({
+  plugins: {
+    // Add the react-x and react-dom plugins
+    'react-x': reactX,
+    'react-dom': reactDom,
+  },
+  rules: {
+    // other rules...
+    // Enable its recommended typescript rules
+    ...reactX.configs['recommended-typescript'].rules,
+    ...reactDom.configs.recommended.rules,
+  },
+})
+```
