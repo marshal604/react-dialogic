@@ -1,5 +1,4 @@
 import React, { ReactNode } from 'react';
-import { ThemeProvider } from '../context/ThemeContext';
 import { DialogContextProvider } from '../context/DialogContext';
 import { DialogueConfig, CharacterConfig, DialogueNode } from '../types';
 
@@ -52,7 +51,6 @@ export const DialogProvider: React.FC<DialogProviderProps> = ({
   onMessageEnd
 }) => {
   return (
-    <ThemeProvider theme={theme}>
       <DialogContextProvider
         characters={characters}
         dialogue={dialogue}
@@ -63,6 +61,5 @@ export const DialogProvider: React.FC<DialogProviderProps> = ({
       >
         {children}
       </DialogContextProvider>
-    </ThemeProvider>
   );
 }; 

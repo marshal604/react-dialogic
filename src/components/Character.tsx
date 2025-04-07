@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { CharacterConfig } from '../types';
-import { useTheme } from '../context/ThemeContext';
+import '../styles/index.css';
 
 interface CharacterProps {
   /**
@@ -30,8 +30,6 @@ export const Character: React.FC<CharacterProps> = ({
   position = 'center',
   active = true
 }) => {
-  const { theme } = useTheme();
-  
   // 根據情緒獲取圖片URL
   const imageUrl = useMemo(() => {
     return config.images[emotion] || config.images.default;
@@ -54,8 +52,8 @@ export const Character: React.FC<CharacterProps> = ({
   
   // 動畫類名
   const animationClass = active 
-    ? theme.animations.characterEnter 
-    : theme.animations.characterExit;
+    ? 'dialogic-character-enter' 
+    : 'dialogic-character-exit';
 
   return (
     <div

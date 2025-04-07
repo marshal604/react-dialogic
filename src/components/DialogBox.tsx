@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useTypewriter } from '../hooks';
-import { useTheme } from '../context/ThemeContext';
+import '../styles/index.css';
 
 interface DialogBoxProps {
   /**
@@ -45,9 +45,8 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
   onTypingComplete,
   onNext
 }) => {
-  const { theme } = useTheme();
   const { displayText, isComplete, complete } = useTypewriter(text, {
-    speed: typingSpeed || theme.animations.typewriterSpeed,
+    speed: typingSpeed || 40, // 預設值，CSS變量會在樣式中生效
     startTyping: isTyping,
     onComplete: onTypingComplete
   });
@@ -77,36 +76,22 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
 
   return (
     <div
-      className="dialogic-dialog-box w-full p-4 cursor-pointer"
+      className="dialogic-dialog-box"
       onClick={handleClick}
       onKeyDown={handleKeyDown}
       tabIndex={0}
       role="button"
       aria-label="繼續對話"
-      style={{
-        backgroundColor: theme.colors.dialogBackground,
-        borderColor: theme.colors.dialogBorder,
-        borderWidth: '2px',
-        borderRadius: theme.borderRadius.dialog,
-        fontFamily: theme.fonts.dialog
-      }}
     >
       {name && (
         <div
-          className="dialogic-character-name font-bold mb-2"
-          style={{
-            color: textColor || theme.colors.nameText
-          }}
+          className="dialogic-character-name"
+          style={textColor ? { color: textColor } : undefined}
         >
           {name}
         </div>
       )}
-      <div
-        className="dialogic-dialog-text"
-        style={{
-          color: theme.colors.dialogText
-        }}
-      >
+      <div className="dialogic-dialog-text">
         {displayText}
       </div>
       {isComplete && (

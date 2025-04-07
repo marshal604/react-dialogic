@@ -5,6 +5,3 @@ export * from './components';
 
 // 導出類型
 export * from './types';
-
-// 導出主題
-export * from './themes'; 
