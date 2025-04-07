@@ -1,9 +1,5 @@
-import React from 'react';
-import { DialogSystem, DialogProvider } from 'react-dialogic';
-import 'react-dialogic/dist/styles.css';
-
 // 角色配置
-const characters = {
+export const characters = {
   mei: {
     name: '小美',
     images: {
@@ -24,7 +20,7 @@ const characters = {
 };
 
 // 對話腳本
-const dialogue = {
+export const dialogue = {
   start: {
     text: '今天天氣真好啊！',
     character: 'mei',
@@ -67,37 +63,4 @@ const dialogue = {
     emotion: 'happy',
     // 沒有next屬性，對話將結束
   }
-};
-
-function BasicExample() {
-  // 事件處理函數
-  const handleMessageStart = (dialogueNode) => {
-    console.log('對話開始:', dialogueNode);
-  };
-  
-  const handleMessage = (dialogueNode) => {
-    console.log('對話進行中:', dialogueNode);
-  };
-  
-  const handleMessageEnd = (dialogueNode) => {
-    console.log('對話結束:', dialogueNode);
-  };
-
-  return (
-    <div className="app">
-      <DialogProvider 
-        theme="gameClassic"
-        characters={characters}
-        dialogue={dialogue}
-        startNode="start"
-        onMessageStart={handleMessageStart}
-        onMessage={handleMessage}
-        onMessageEnd={handleMessageEnd}
-      >
-        <DialogSystem />
-      </DialogProvider>
-    </div>
-  );
-}
-
-export default BasicExample; 
+}; 

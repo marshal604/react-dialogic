@@ -1,62 +1,24 @@
-import React, { useEffect } from 'react';
-import { DialogueConfig, DialogueNode, CharacterConfig } from '../types';
+import React from 'react';
 import { Character } from './Character';
 import { DialogBox } from './DialogBox';
 import { ChoiceMenu } from './ChoiceMenu';
 import { Background } from './Background';
 import { useDialog } from '../context/DialogContext';
 
-export interface DialogSystemProps {
-  /**
-   * 角色配置集合
-   */
-  characters: Record<string, CharacterConfig>;
-  /**
-   * 對話配置
-   */
-  dialogue: DialogueConfig;
-  /**
-   * 起始對話節點
-   */
-  startNode: string;
-  /**
-   * 對話開始的回調
-   */
-  onMessageStart?: (node: DialogueNode) => void;
-  /**
-   * 對話節點結束的回調
-   */
-  onMessage?: (node: DialogueNode) => void;
-  /**
-   * 對話流結束的回調
-   */
-  onMessageEnd?: (node: DialogueNode) => void;
-}
-
 /**
  * 對話系統主組件
  */
-export const DialogSystem: React.FC<DialogSystemProps> = ({
-  characters,
-  dialogue,
-  startNode,
-  onMessageStart,
-  onMessage,
-  onMessageEnd
-}) => {
+export const DialogSystem: React.FC = () => {
   const {
     currentNode,
-    setCurrentNode,
     handleNext,
-    handleChoiceSelect
+    handleChoiceSelect,
+    dialogue,
+    characters,
+    onMessageStart,
+    onMessage,
+    onMessageEnd
   } = useDialog();
-
-  // 初始化對話系統
-  useEffect(() => {
-    if (startNode) {
-      setCurrentNode(startNode);
-    }
-  }, [startNode, setCurrentNode]);
 
   // 如果沒有當前節點或無效的節點ID，則不渲染
   if (!currentNode || !dialogue[currentNode]) {
@@ -66,8 +28,13 @@ export const DialogSystem: React.FC<DialogSystemProps> = ({
   const currentDialogue = dialogue[currentNode];
   const character = characters[currentDialogue.character];
 
+  const onNext = () => {
+    handleNext();
+    if (onMessageEnd) onMessageEnd(currentDialogue);
+  };
+
   return (
-    <div className="dialogic-container fixed inset-0 flex flex-col justify-end overflow-hidden z-50">
+    <div className="dialogic-container fixed inset-0 flex flex-col justify-end overflow-hidden z-50" style={{ userSelect: 'none' }}>
       {/* 背景 */}
       <Background src={currentDialogue.background} />
 
@@ -89,7 +56,7 @@ export const DialogSystem: React.FC<DialogSystemProps> = ({
           name={character?.name}
           text={currentDialogue.text}
           textColor={character?.textColor}
-          onNext={handleNext}
+          onNext={onNext}
           onTypingComplete={() => {
             if (onMessage) onMessage(currentDialogue);
           }}
