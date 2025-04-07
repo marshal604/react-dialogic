@@ -1,6 +1,6 @@
 import React from 'react';
 import { Choice } from '../types';
-import '../styles/index.css';
+import '../styles/index.module.css';
 
 interface ChoiceMenuProps {
   /**

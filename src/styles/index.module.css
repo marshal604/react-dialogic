@@ -1,4 +1,6 @@
-@import './theme.css';
+@import './theme.module.css';
+@import './main.module.css';
+
 
 /* DialogBox 樣式 */
 .dialogic-dialog-box {
@@ -47,4 +49,35 @@
 .dialogic-character-exit {
   animation-name: var(--dialogic-character-exit);
   animation-duration: 0.5s;
+}
+
+/* 角色響應式樣式 */
+.dialogic-character {
+  /* 預設尺寸 (桌面版) */
+  max-width: var(--dialogic-character-width-desktop, 20%);
+  max-height: var(--dialogic-character-height-desktop, 50vh);
+}
+
+/* 平板設備 */
+@media screen and (max-width: 1024px) {
+  .dialogic-character {
+    max-width: var(--dialogic-character-width-tablet, 25%);
+    max-height: var(--dialogic-character-height-tablet, 45vh);
+  }
+}
+
+/* 手機設備 - 橫向 */
+@media screen and (max-width: 768px) {
+  .dialogic-character {
+    max-width: var(--dialogic-character-width-mobile, 30%);
+    max-height: var(--dialogic-character-height-mobile, 40vh);
+  }
+}
+
+/* 手機設備 - 直向 */
+@media screen and (max-width: 480px) {
+  .dialogic-character {
+    max-width: var(--dialogic-character-width-mobile, 40%);
+    max-height: var(--dialogic-character-height-mobile, 35vh);
+  }
 } 

@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { CharacterConfig } from '../types';
-import '../styles/index.css';
+import '../styles/index.module.css';
 
 interface CharacterProps {
   /**
@@ -58,12 +58,11 @@ export const Character: React.FC<CharacterProps> = ({
   return (
     <div
       className={`dialogic-character ${positionClass} ${activeClass} ${animationClass} absolute bottom-0`}
-      style={{ maxHeight: '70vh' }}
     >
       <img 
         src={imageUrl} 
         alt={config.name} 
-        className="h-full w-auto object-contain"
+        className="w-full h-auto object-contain"
       />
     </div>
   );

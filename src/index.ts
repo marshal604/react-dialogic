@@ -1,4 +1,4 @@
-import './styles/main.css';
+import './styles/index.module.css';
 
 // 導出組件
 export * from './components';

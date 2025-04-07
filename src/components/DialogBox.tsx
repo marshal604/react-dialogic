@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useTypewriter } from '../hooks';
-import '../styles/index.css';
+import '../styles/index.module.css';
 
 interface DialogBoxProps {
   /**
