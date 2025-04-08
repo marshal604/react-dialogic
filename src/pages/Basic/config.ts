@@ -4,6 +4,7 @@ import 矇眼的小龍女 from './images/矇眼的小龍女.png'
 import 歐陽鋒 from './images/歐陽鋒.png'
 import 尹志平 from './images/尹志平.png'
 import 草原背景 from './images/草原背景.png'
+import 石洞背景 from './images/石洞背景.png'
 
 // 定義位置常量
 const Position = {
@@ -89,7 +90,7 @@ export const dialogue = {
       
       // 歐陽鋒偷襲小龍女
       { 
-        text: '（突然間，歐陽鋒偷襲小龍女並點了她的穴道）' 
+        text: '（突然間，歐陽鋒偷襲小龍女並點了她的穴道）',
       },
       { 
         speaker: 'xiaoLongNv', 
@@ -109,7 +110,9 @@ export const dialogue = {
       
       // 尹志平出現
       { 
-        text: '（尹志平出現在場景中）' 
+        speaker: 'yinZhiPing',
+        text: '（尹志平出現在場景中）',
+        position: Position.CENTER
       },
       { 
         text: '（尹志平趁機將小龍女的眼睛蒙上）' 
@@ -121,14 +124,15 @@ export const dialogue = {
         position: Position.RIGHT 
       },
       { 
-        text: '（尹志平將小龍女帶到了偏僻的山洞）' 
+        text: '（尹志平將小龍女帶到了偏僻的山洞）',
+        next: 'cave'
       }
     ]
   },
   
   // 場景二：山洞
   cave: {
-    background: 草原背景, // 這裡應該有山洞背景，但暫用草原背景
+    background: 石洞背景,
     sequence: [
       { 
         speaker: 'yinZhiPing', 
@@ -173,8 +177,12 @@ export const dialogue = {
         text: '過兒...你為什麼還叫我姑姑', 
         position: Position.RIGHT,
         choices: [
-          { text: '姑姑就是姑姑啊，不然要叫你什麼', next: 'ending' }
+          { text: '姑姑就是姑姑啊，不然要叫你什麼' }
         ]
+      },
+      {
+        text: '(小龍女哭著跑了出去...)',
+        next: 'ending'
       }
     ]
   },
@@ -193,6 +201,9 @@ export const dialogue = {
         text: '姑姑！等等！', 
         position: Position.LEFT 
       },
+      {
+        text: '這是個壞結局...',
+      }
       // 這是最後一個對話，結束
     ]
   }
