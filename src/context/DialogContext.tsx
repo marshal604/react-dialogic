@@ -117,8 +117,14 @@ export const DialogContextProvider: React.FC<DialogProviderProps> = ({
       handleSequenceChange(currentScene!, currentIndex + 1);
     } 
     // 如果是序列的最後一項且沒有選項，則對話結束
-    else if (onMessageEnd) {
-      onMessageEnd(currentItem);
+    else {
+      if (onMessageEnd) {
+        onMessageEnd(currentItem);
+      }
+
+      if (currentItem.next) {
+        handleSequenceChange(currentItem.next, 0);
+      }
     }
   }, [currentScene, currentIndex, getCurrentScene, getCurrentItem, isTypingComplete, handleTypingComplete, handleSequenceChange, onMessageEnd]);
 

@@ -16,9 +16,6 @@ export const DialogSystem: React.FC = () => {
     handleNext,
     handleChoiceSelect,
     characters,
-    onMessageStart,
-    onMessage,
-    onMessageEnd,
     handleTypingComplete
   } = useDialog();
 
@@ -39,7 +36,6 @@ export const DialogSystem: React.FC = () => {
 
   const onNext = () => {
     handleNext();
-    if (onMessageEnd) onMessageEnd(currentItem);
   };
 
   return (

@@ -52,6 +52,10 @@ export interface SequenceItem {
    * 對話框樣式覆蓋
    */
   style?: Record<string, any>;
+  /**
+   * 對話結束後跳轉的場景ID
+   */
+  next?: string;
 }
 
 /**
@@ -77,18 +81,3 @@ export interface DialogueConfig {
    */
   [key: string]: Scene;
 }
-
-/**
- * 向下兼容的對話節點類型定義（保留用於類型兼容）
- */
-export interface DialogueNode {
-  text: string;
-  character: string;
-  emotion?: string;
-  position?: 'left' | 'right' | 'center';
-  background?: string;
-  next?: string;
-  choices?: Choice[];
-  sound?: string;
-  style?: Record<string, any>;
-} 
