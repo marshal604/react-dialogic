@@ -1,4 +1,3 @@
-import React from 'react';
 import { ReactDialogic, SequenceItem } from 'react-dialogic';
 import { characters, dialogue } from './config';
 
