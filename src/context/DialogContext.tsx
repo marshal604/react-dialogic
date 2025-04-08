@@ -83,6 +83,7 @@ export const DialogContextProvider: React.FC<DialogProviderProps> = ({
 
   // 完成打字效果時觸發onMessage
   const handleTypingComplete = useCallback(() => {
+    alert(`handleTypingComplete: true`)
     setIsTypingComplete(true);
     const currentItem = getCurrentItem();
     if (currentItem && onMessage) {
@@ -93,12 +94,14 @@ export const DialogContextProvider: React.FC<DialogProviderProps> = ({
   // 前進到下一個對話項
   const handleNext = useCallback(() => {
     const scene = getCurrentScene();
+    alert(`handleNext: scene: ${Boolean(scene)}`)
     if (!scene) return;
-    
     const currentItem = getCurrentItem();
+    alert(`handleNext: currentItem: ${Boolean(currentItem)}`)
     if (!currentItem) return;
 
     // 如果打字效果未完成，則完成打字效果
+    alert(`handleNext: isTypingComplete: ${isTypingComplete}`)
     if (!isTypingComplete) {
       handleTypingComplete();
       return;
