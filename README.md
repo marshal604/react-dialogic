@@ -9,7 +9,7 @@
 
 ---
 
-![React-Dialogic Example](https://via.placeholder.com/800x400?text=React-Dialogic+Demo)
+![React-Dialogic Example](https://marshal604.github.io/react-dialogic/)
 
 <details open>
 <summary>繁體中文</summary>
