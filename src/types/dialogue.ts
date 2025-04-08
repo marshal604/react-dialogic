@@ -13,7 +13,7 @@ export interface Choice {
   /**
    * 選擇後跳轉的場景ID
    */
-  next: string;
+  next?: string;
 }
 
 /**
