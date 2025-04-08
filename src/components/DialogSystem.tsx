@@ -46,7 +46,7 @@ export const DialogSystem: React.FC = () => {
       {/* 背景 */}
       <Background src={backgroundSrc} />
 
-      {/* 中間區域：角色顯示 */}
+      {/* 角色顯示區域 */}
       <div className={styles.charactersContainer}>
         {character && (
           <Character

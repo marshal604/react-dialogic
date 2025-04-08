@@ -14,13 +14,15 @@
 }
 
 .charactersContainer {
-  position: relative;
+  position: absolute;
   width: 100%;
-  flex: 1;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  height: var(--dialogic-characters-container-height, 60%);
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  pointer-events: none;
 }
 
 .dialogArea {
@@ -29,6 +31,8 @@
   padding: var(--dialogic-dialog-area-padding, 0.5rem 0);
   margin-top: auto;
   min-height: var(--dialogic-dialog-area-min-height, 200px);
+  z-index: 2;
+  position: relative;
 }
 
 .background {

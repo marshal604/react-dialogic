@@ -36,14 +36,27 @@ export const Character: React.FC<CharacterProps> = ({
   }, [config.images, emotion]);
 
   // 根據位置設置樣式
-  const positionClass = useMemo(() => {
+  const positionStyle = useMemo(() => {
     switch (position) {
       case 'left':
-        return 'left-8';
+        return {
+          left: 'var(--dialogic-character-side-margin, 1rem)',
+          right: 'auto',
+          transform: 'translateX(0)',
+        };
       case 'right':
-        return 'right-8';
+        return {
+          left: 'auto',
+          right: 'var(--dialogic-character-side-margin, 1rem)',
+          transform: 'translateX(0)',
+        };
       default:
-        return 'mx-auto';
+        return {
+          left: '50%',
+          right: 'auto',
+          transform: 'translateX(-50%)',
+          bottom: 'var(--dialogic-character-bottom, 0)',
+        };
     }
   }, [position]);
 
@@ -57,19 +70,19 @@ export const Character: React.FC<CharacterProps> = ({
 
   return (
     <div
-      className={`${styles.character} ${positionClass} ${activeClass} ${animationClass} absolute bottom-8`}
+      className={`${styles.character} ${activeClass} ${animationClass} pointer-events-auto`}
       style={{
         position: 'absolute',
-        bottom: 'var(--dialogic-character-bottom, 0)',
-        left: position === 'left' ? 'var(--dialogic-character-side-margin, 2rem)' : 'auto',
-        right: position === 'right' ? 'var(--dialogic-character-side-margin, 2rem)' : 'auto',
-        margin: position === 'center' ? '0 auto' : 'initial',
+        height: position === 'center' ? 'auto' : '100%',
+        display: 'flex',
+        alignItems: 'flex-end',
+        ...positionStyle
       }}
     >
       <img 
         src={imageUrl} 
         alt={config.name} 
-        className="w-full h-auto object-contain"
+        className={position !== 'center' ? styles.characterSide : "w-full h-auto object-contain"}
       />
     </div>
   );
