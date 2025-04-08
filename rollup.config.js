@@ -34,6 +34,8 @@ export default [
           path: './postcss.config.js'
         },
         extensions: ['.css'],
+        modules: true,
+        extract: 'index.css',
         minimize: true,
         inject: {
           insertAt: 'top'

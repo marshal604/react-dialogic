@@ -19,6 +19,7 @@
 ## 快速導航 / Quick Navigation
 
 - [安裝 / Installation](#安裝--installation)
+- [使用 / Usage](#使用--usage)
 - [文檔 / Documentation](#文檔--documentation)
 - [示例 / Examples](#示例--examples)
 - [支持 / Support](#支持--support)
@@ -29,6 +30,24 @@
 npm install react-dialogic
 # or
 yarn add react-dialogic
+```
+
+## 使用 / Usage
+
+```jsx
+import { ReactDialogic } from 'react-dialogic';
+// 重要：引入樣式
+import 'react-dialogic/dist/index.css';
+
+function App() {
+  return (
+    <ReactDialogic
+      characters={charactersConfig}
+      dialogue={dialogueConfig}
+      startScene="intro"
+    />
+  );
+}
 ```
 
 ## 文檔 / Documentation

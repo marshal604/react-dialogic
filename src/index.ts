@@ -1,4 +1,5 @@
-import './styles/index.module.css';
+// 導入樣式
+import './styles/index.css';
 
 // 導出組件
 export * from './components';
