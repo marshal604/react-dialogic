@@ -64,6 +64,7 @@ export function useTypewriter(text: string, options: TypewriterOptions = {}) {
 
     // 如果當前索引已經到達文本末尾，標記為完成
     if (currentIndex >= text.length) {
+      console.log('currentIndex >= text.length')
       setIsComplete(true);
       onComplete?.();
       return;
