@@ -5,10 +5,16 @@
   border-radius: var(--dialogic-dialog-radius);
   font-family: var(--dialogic-font-dialog);
   padding: 1rem;
-  width: 100%;
+  width: var(--dialogic-dialog-width, 100%);
+  max-width: var(--dialogic-dialog-max-width, 800px);
+  height: var(--dialogic-dialog-height, auto);
+  min-height: var(--dialogic-dialog-min-height, 150px);
+  max-height: var(--dialogic-dialog-max-height, 200px);
+  margin: 0 auto;
   cursor: pointer;
-  min-height: 150px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: auto;
 }
 
 .characterName {
@@ -22,8 +28,9 @@
 }
 
 .continueIndicator {
-  float: right;
-  margin-top: 0.5rem;
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
   font-size: 1.2rem;
   animation: pulse 1s infinite ease-in-out;
 }

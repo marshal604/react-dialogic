@@ -57,7 +57,14 @@ export const Character: React.FC<CharacterProps> = ({
 
   return (
     <div
-      className={`${styles.character} ${positionClass} ${activeClass} ${animationClass} absolute bottom-0`}
+      className={`${styles.character} ${positionClass} ${activeClass} ${animationClass} absolute bottom-8`}
+      style={{
+        position: 'absolute',
+        bottom: 'var(--dialogic-character-bottom, 0)',
+        left: position === 'left' ? 'var(--dialogic-character-side-margin, 2rem)' : 'auto',
+        right: position === 'right' ? 'var(--dialogic-character-side-margin, 2rem)' : 'auto',
+        margin: position === 'center' ? '0 auto' : 'initial',
+      }}
     >
       <img 
         src={imageUrl} 

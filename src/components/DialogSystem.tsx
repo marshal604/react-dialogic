@@ -46,7 +46,7 @@ export const DialogSystem: React.FC = () => {
       {/* 背景 */}
       <Background src={backgroundSrc} />
 
-      {/* 角色 */}
+      {/* 中間區域：角色顯示 */}
       <div className={styles.charactersContainer}>
         {character && (
           <Character
@@ -58,25 +58,27 @@ export const DialogSystem: React.FC = () => {
         )}
       </div>
 
-      {/* 對話框和選項 */}
-      <div className="w-full max-w-5xl mx-auto mb-8 px-4">
-        <DialogBox
-          name={character?.name}
-          text={currentItem.text}
-          textColor={character?.textColor}
-          onNext={onNext}
-          onTypingComplete={() => {
-            if (onMessage) onMessage(currentItem);
-          }}
-        />
-
-        {/* 選項 */}
-        {currentItem.choices && (
-          <ChoiceMenu
-            choices={currentItem.choices}
-            onSelect={handleChoiceSelect}
+      {/* 底部區域：對話框和選項 */}
+      <div className={styles.dialogArea}>
+        <div className="w-full max-w-5xl mx-auto px-4 mb-4">
+          <DialogBox
+            name={character?.name}
+            text={currentItem.text}
+            textColor={character?.textColor}
+            onNext={onNext}
+            onTypingComplete={() => {
+              if (onMessage) onMessage(currentItem);
+            }}
           />
-        )}
+
+          {/* 選項 */}
+          {currentItem.choices && (
+            <ChoiceMenu
+              choices={currentItem.choices}
+              onSelect={handleChoiceSelect}
+            />
+          )}
+        </div>
       </div>
     </div>
   );
