@@ -76,77 +76,154 @@ yarn add react-dialogic
 
 ## 基本用法
 
+### 步驟一：引入組件和樣式
+
 ```jsx
 import { ReactDialogic } from 'react-dialogic';
 // 重要：引入樣式
 import 'react-dialogic/dist/styles.css';
+```
+
+### 步驟二：定義角色配置
+
+```jsx
+// 定義位置常量（可選）
+const Position = {
+  LEFT: 'left',
+  RIGHT: 'right',
+  CENTER: 'center'
+};
 
 // 角色配置
 const characters = {
-  mei: {
-    name: '小美',
+  yangGuo: {
+    name: '楊過',
     images: {
-      default: '/images/mei-default.png',
-      happy: '/images/mei-happy.png',
-      sad: '/images/mei-sad.png'
+      default: '/images/yangGuo.png'
     },
-    textColor: '#e63946',
-    defaultPosition: 'left'
+    textColor: '#3a86ff',
+    defaultPosition: Position.LEFT
   },
-  kai: {
-    name: '小凱',
+  xiaoLongNv: {
+    name: '小龍女',
     images: {
-      default: '/images/kai-default.png',
-      surprised: '/images/kai-surprised.png'
+      default: '/images/xiaoLongNv.png',
+      blindfolded: '/images/xiaoLongNv-blindfolded.png'
     },
-    textColor: '#457b9d',
-    defaultPosition: 'right'
+    textColor: '#8338ec',
+    defaultPosition: Position.RIGHT
   }
 };
+```
 
+### 步驟三：定義對話場景
+
+```jsx
 // 對話配置
 const dialogue = {
-  // 場景：公園
-  park: {
-    background: '/images/park.jpg',
+  // 場景一：開始
+  start: {
+    background: '/images/grassland.png',
     sequence: [
       // 角色對話
-      { speaker: 'mei', emotion: 'happy', text: '今天天氣真好啊！', position: 'left' },
-      { speaker: 'kai', text: '是啊，要不要一起去公園走走？', position: 'right' },
+      { 
+        speaker: 'yangGuo', 
+        text: '姑姑，我們今天練什麼武功？', 
+        position: Position.LEFT 
+      },
+      { 
+        speaker: 'xiaoLongNv', 
+        text: '我們今天練習玉女心經。', 
+        position: Position.RIGHT 
+      },
       
       // 旁白 - 不指定角色
-      { text: '兩人一邊聊天，一邊朝公園深處走去。' },
+      { 
+        text: '（兩人來到了練武場）' 
+      },
       
       // 選項分支
       { 
-        speaker: 'mei',
-        text: '你想做什麼呢？',
+        speaker: 'xiaoLongNv',
+        text: '你想先練習哪個部分？',
         choices: [
-          { text: '去野餐', next: 'picnic' },
-          { text: '去看電影', next: 'cinema' }
+          { text: '內功心法', next: 'innerPower' },
+          { text: '劍法招式', next: 'swordSkills' }
         ]
       }
     ]
   },
   
-  // 場景：野餐
-  picnic: {
-    background: '/images/park-picnic.jpg',
+  // 場景二：內功
+  innerPower: {
+    background: '/images/cave.png',
     sequence: [
-      { speaker: 'kai', emotion: 'happy', text: '野餐是個好主意！我們去準備吧。' },
-      { speaker: 'mei', text: '那就這麼決定了！' }
+      { 
+        speaker: 'xiaoLongNv', 
+        text: '讓我們先打坐冥想，修煉內功。', 
+        position: Position.RIGHT 
+      },
+      { 
+        speaker: 'yangGuo', 
+        text: '好的，姑姑。', 
+        position: Position.LEFT 
+      },
+      // 下一個場景
+      {
+        text: '（兩人開始打坐）',
+        next: 'ending'
+      }
     ]
   },
   
-  // 場景：電影院
-  cinema: {
-    background: '/images/cinema.jpg',
+  // 場景三：劍法
+  swordSkills: {
+    background: '/images/grassland.png',
     sequence: [
-      { speaker: 'kai', text: '看電影也不錯，最近有很多新上映的片子。' },
-      { speaker: 'mei', emotion: 'happy', text: '那就這麼決定了！' }
+      { 
+        speaker: 'xiaoLongNv', 
+        text: '拿起你的劍，讓我們練習劍法。', 
+        position: Position.RIGHT 
+      },
+      { 
+        speaker: 'yangGuo', 
+        text: '遵命，姑姑。', 
+        position: Position.LEFT 
+      },
+      // 下一個場景
+      {
+        text: '（兩人開始練劍）',
+        next: 'ending'
+      }
+    ]
+  },
+  
+  // 結束場景
+  ending: {
+    background: '/images/sunset.png',
+    sequence: [
+      { 
+        speaker: 'xiaoLongNv', 
+        text: '今天的練習到此為止。', 
+        position: Position.RIGHT 
+      },
+      { 
+        speaker: 'yangGuo', 
+        text: '謝謝姑姑指導。', 
+        position: Position.LEFT 
+      }
+      // 沒有next，對話結束
     ]
   }
 };
+```
+
+### 步驟四：使用組件
+
+```jsx
+import React from 'react';
+import { ReactDialogic } from 'react-dialogic';
+import 'react-dialogic/dist/styles.css';
 
 function App() {
   // 事件處理函數
@@ -166,16 +243,61 @@ function App() {
   };
 
   return (
-    <ReactDialogic 
-      characters={characters}
-      dialogue={dialogue}
-      startScene="park"
-      onMessageStart={handleMessageStart}
-      onMessage={handleMessage}
-      onMessageEnd={handleMessageEnd}
-    />
+    <div className="app">
+      <ReactDialogic 
+        characters={characters}
+        dialogue={dialogue}
+        startScene="start"
+        onMessageStart={handleMessageStart}
+        onMessage={handleMessage}
+        onMessageEnd={handleMessageEnd}
+      />
+    </div>
   );
 }
+
+export default App;
+```
+
+### 步驟五：圖片引入（如使用打包工具如Webpack）
+
+如果您使用Webpack等打包工具，可以直接引入本地圖片：
+
+```jsx
+import yangGuoImg from './images/yangGuo.png';
+import xiaoLongNvImg from './images/xiaoLongNv.png';
+import blindfoldedImg from './images/xiaoLongNv-blindfolded.png';
+import grasslandBg from './images/grassland.png';
+import caveBg from './images/cave.png';
+import sunsetBg from './images/sunset.png';
+
+// 角色配置
+const characters = {
+  yangGuo: {
+    name: '楊過',
+    images: {
+      default: yangGuoImg
+    },
+    // ...其他設定
+  },
+  xiaoLongNv: {
+    name: '小龍女',
+    images: {
+      default: xiaoLongNvImg,
+      blindfolded: blindfoldedImg
+    },
+    // ...其他設定
+  }
+};
+
+// 對話配置
+const dialogue = {
+  start: {
+    background: grasslandBg,
+    // ...序列
+  },
+  // ...其他場景
+};
 ```
 
 ## 自定義主題
@@ -323,77 +445,154 @@ yarn add react-dialogic
 
 ## Basic Usage
 
+### Step 1: Import Components and Styles
+
 ```jsx
 import { ReactDialogic } from 'react-dialogic';
 // Important: import styles
 import 'react-dialogic/dist/styles.css';
+```
+
+### Step 2: Define Character Configuration
+
+```jsx
+// Define position constants (optional)
+const Position = {
+  LEFT: 'left',
+  RIGHT: 'right',
+  CENTER: 'center'
+};
 
 // Character configuration
 const characters = {
-  mei: {
-    name: 'Mei',
+  yangGuo: {
+    name: 'Yang Guo',
     images: {
-      default: '/images/mei-default.png',
-      happy: '/images/mei-happy.png',
-      sad: '/images/mei-sad.png'
+      default: '/images/yangGuo.png'
     },
-    textColor: '#e63946',
-    defaultPosition: 'left'
+    textColor: '#3a86ff',
+    defaultPosition: Position.LEFT
   },
-  kai: {
-    name: 'Kai',
+  xiaoLongNv: {
+    name: 'Xiao Long Nv',
     images: {
-      default: '/images/kai-default.png',
-      surprised: '/images/kai-surprised.png'
+      default: '/images/xiaoLongNv.png',
+      blindfolded: '/images/xiaoLongNv-blindfolded.png'
     },
-    textColor: '#457b9d',
-    defaultPosition: 'right'
+    textColor: '#8338ec',
+    defaultPosition: Position.RIGHT
   }
 };
+```
 
+### Step 3: Define Dialogue Scenes
+
+```jsx
 // Dialogue configuration
 const dialogue = {
-  // Scene: Park
-  park: {
-    background: '/images/park.jpg',
+  // Scene One: Start
+  start: {
+    background: '/images/grassland.png',
     sequence: [
       // Character dialogue
-      { speaker: 'mei', emotion: 'happy', text: 'What a beautiful day today!', position: 'left' },
-      { speaker: 'kai', text: 'Yes, shall we go to the park for a walk?', position: 'right' },
+      { 
+        speaker: 'yangGuo', 
+        text: 'Master, what skills shall we practice today?', 
+        position: Position.LEFT 
+      },
+      { 
+        speaker: 'xiaoLongNv', 
+        text: 'Today we will practice the Jade Maiden Heart Sutra.', 
+        position: Position.RIGHT 
+      },
       
       // Narration - no character specified
-      { text: 'The two chatted as they walked deeper into the park.' },
+      { 
+        text: '(The two arrived at the training area)' 
+      },
       
       // Choice branch
       { 
-        speaker: 'mei',
-        text: 'What would you like to do?',
+        speaker: 'xiaoLongNv',
+        text: 'Which part would you like to practice first?',
         choices: [
-          { text: 'Have a picnic', next: 'picnic' },
-          { text: 'Go see a movie', next: 'cinema' }
+          { text: 'Inner power cultivation', next: 'innerPower' },
+          { text: 'Sword techniques', next: 'swordSkills' }
         ]
       }
     ]
   },
   
-  // Scene: Picnic
-  picnic: {
-    background: '/images/park-picnic.jpg',
+  // Scene Two: Inner Power
+  innerPower: {
+    background: '/images/cave.png',
     sequence: [
-      { speaker: 'kai', emotion: 'happy', text: 'A picnic is a great idea! Let\'s prepare.' },
-      { speaker: 'mei', text: 'Then it\'s decided!' }
+      { 
+        speaker: 'xiaoLongNv', 
+        text: 'Let us sit in meditation to cultivate inner power.', 
+        position: Position.RIGHT 
+      },
+      { 
+        speaker: 'yangGuo', 
+        text: 'Yes, master.', 
+        position: Position.LEFT 
+      },
+      // Next scene
+      {
+        text: '(They begin to meditate)',
+        next: 'ending'
+      }
     ]
   },
   
-  // Scene: Cinema
-  cinema: {
-    background: '/images/cinema.jpg',
+  // Scene Three: Sword Skills
+  swordSkills: {
+    background: '/images/grassland.png',
     sequence: [
-      { speaker: 'kai', text: 'A movie sounds good too, there are many new releases.' },
-      { speaker: 'mei', emotion: 'happy', text: 'Then it\'s decided!' }
+      { 
+        speaker: 'xiaoLongNv', 
+        text: 'Take your sword and let us practice sword techniques.', 
+        position: Position.RIGHT 
+      },
+      { 
+        speaker: 'yangGuo', 
+        text: 'As you command, master.', 
+        position: Position.LEFT 
+      },
+      // Next scene
+      {
+        text: '(They begin sword practice)',
+        next: 'ending'
+      }
+    ]
+  },
+  
+  // Ending Scene
+  ending: {
+    background: '/images/sunset.png',
+    sequence: [
+      { 
+        speaker: 'xiaoLongNv', 
+        text: 'That\'s enough practice for today.', 
+        position: Position.RIGHT 
+      },
+      { 
+        speaker: 'yangGuo', 
+        text: 'Thank you for your guidance, master.', 
+        position: Position.LEFT 
+      }
+      // No next property, dialogue ends
     ]
   }
 };
+```
+
+### Step 4: Use the Component
+
+```jsx
+import React from 'react';
+import { ReactDialogic } from 'react-dialogic';
+import 'react-dialogic/dist/styles.css';
 
 function App() {
   // Event handlers
@@ -413,16 +612,61 @@ function App() {
   };
 
   return (
-    <ReactDialogic 
-      characters={characters}
-      dialogue={dialogue}
-      startScene="park"
-      onMessageStart={handleMessageStart}
-      onMessage={handleMessage}
-      onMessageEnd={handleMessageEnd}
-    />
+    <div className="app">
+      <ReactDialogic 
+        characters={characters}
+        dialogue={dialogue}
+        startScene="start"
+        onMessageStart={handleMessageStart}
+        onMessage={handleMessage}
+        onMessageEnd={handleMessageEnd}
+      />
+    </div>
   );
 }
+
+export default App;
+```
+
+### Step 5: Image Imports (When Using Bundlers like Webpack)
+
+If you're using bundlers like Webpack, you can import local images directly:
+
+```jsx
+import yangGuoImg from './images/yangGuo.png';
+import xiaoLongNvImg from './images/xiaoLongNv.png';
+import blindfoldedImg from './images/xiaoLongNv-blindfolded.png';
+import grasslandBg from './images/grassland.png';
+import caveBg from './images/cave.png';
+import sunsetBg from './images/sunset.png';
+
+// Character configuration
+const characters = {
+  yangGuo: {
+    name: 'Yang Guo',
+    images: {
+      default: yangGuoImg
+    },
+    // ...other settings
+  },
+  xiaoLongNv: {
+    name: 'Xiao Long Nv',
+    images: {
+      default: xiaoLongNvImg,
+      blindfolded: blindfoldedImg
+    },
+    // ...other settings
+  }
+};
+
+// Dialogue configuration
+const dialogue = {
+  start: {
+    background: grasslandBg,
+    // ...sequence
+  },
+  // ...other scenes
+};
 ```
 
 ## Custom Themes
