@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { CharacterConfig } from '../types';
-import styles from '../styles/index.module.css';
+import styles from '../styles/Character.module.css';
 
 interface CharacterProps {
   /**

@@ -1,9 +1,27 @@
-@import './index.module.css';
-
-/* 預設類名，讓模組化的類可以使用 */
+/* 全局變量和基本樣式 */
 :root {
   --dialogic-font-dialog: sans-serif;
   --dialogic-font-choice: sans-serif;
+}
+
+/* 角色動畫 */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+/* 全局角色位置樣式 */
+.dialogic-character {
+  position: absolute;
+  bottom: 0;
+  max-height: 70vh;
+  z-index: 1;
+  transition: all 0.3s ease-in-out;
 }
 
 .dialogic-character-enter {
@@ -14,14 +32,6 @@
 .dialogic-character-exit {
   animation-name: fadeOut;
   animation-duration: 0.5s;
-}
-
-.dialogic-character {
-  position: absolute;
-  bottom: 0;
-  max-height: 70vh;
-  z-index: 1;
-  transition: all 0.3s ease-in-out;
 }
 
 .dialogic-character-left {
@@ -37,6 +47,7 @@
   transform: translateX(-50%);
 }
 
+/* 全局對話框樣式 */
 .dialogic-dialog-box {
   background-color: var(--dialogic-dialog-bg);
   border: 2px solid var(--dialogic-dialog-border);

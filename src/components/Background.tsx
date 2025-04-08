@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import styles from '../styles/DialogicContainer.module.css';
 
 interface BackgroundProps {
   /**
@@ -60,7 +61,7 @@ export const Background: React.FC<BackgroundProps> = ({
     <>
       {/* 當前背景 */}
       <div
-        className="dialogic-background"
+        className={styles.background}
         style={{
           ...backgroundStyle(currentSrc),
           opacity: 1
@@ -70,7 +71,7 @@ export const Background: React.FC<BackgroundProps> = ({
       {/* 過渡中的舊背景 */}
       {isTransitioning && previousSrc && (
         <div
-          className="dialogic-background"
+          className={styles.background}
           style={{
             ...backgroundStyle(previousSrc),
             opacity: 0

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useTypewriter } from '../hooks';
-import styles from '../styles/index.module.css';
+import styles from '../styles/DialogBox.module.css';
 
 interface DialogBoxProps {
   /**
@@ -95,7 +95,7 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
         {displayText}
       </div>
       {isComplete && (
-        <div className="text-right mt-2 animate-pulse">
+        <div className={styles.continueIndicator}>
           ▼
         </div>
       )}

@@ -1,0 +1,21 @@
+/* ChoiceMenu 元件專用樣式 */
+.choices {
+  margin-top: 1rem;
+}
+
+.choiceItem {
+  background-color: var(--dialogic-choice-bg);
+  color: var(--dialogic-choice-text);
+  border-radius: var(--dialogic-choice-radius);
+  font-family: var(--dialogic-font-choice);
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.choiceItem:hover {
+  background-color: var(--dialogic-choice-bg-hover);
+  color: var(--dialogic-choice-text-hover);
+  transform: translateY(-2px);
+} 

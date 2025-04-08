@@ -4,6 +4,7 @@ import { DialogBox } from './DialogBox';
 import { ChoiceMenu } from './ChoiceMenu';
 import { Background } from './Background';
 import { useDialog } from '../context/DialogContext';
+import styles from '../styles/DialogicContainer.module.css';
 
 /**
  * 對話系統主組件
@@ -41,12 +42,12 @@ export const DialogSystem: React.FC = () => {
   };
 
   return (
-    <div className="dialogic-container fixed inset-0 flex flex-col justify-end overflow-hidden z-50" style={{ userSelect: 'none' }}>
+    <div className={styles.container} style={{ userSelect: 'none' }}>
       {/* 背景 */}
       <Background src={backgroundSrc} />
 
       {/* 角色 */}
-      <div className="dialogic-characters-container relative w-full flex-1">
+      <div className="relative w-full flex-1">
         {character && (
           <Character
             config={character}
@@ -58,7 +59,7 @@ export const DialogSystem: React.FC = () => {
       </div>
 
       {/* 對話框和選項 */}
-      <div className="dialogic-controls-container w-full max-w-5xl mx-auto mb-8 px-4">
+      <div className="w-full max-w-5xl mx-auto mb-8 px-4">
         <DialogBox
           name={character?.name}
           text={currentItem.text}
