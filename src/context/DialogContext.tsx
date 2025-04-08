@@ -8,7 +8,7 @@ interface DialogContextType {
   characters: Record<string, CharacterConfig>;
   setCurrentScene: (sceneId: string) => void;
   handleNext: () => void;
-  handleChoiceSelect: (next: string) => void;
+  handleChoiceSelect: (next?: string) => void;
   getCurrentItem: () => SequenceItem | null;
   getCurrentScene: () => Scene | null;
   onMessageStart?: (item: SequenceItem) => void;
@@ -129,9 +129,14 @@ export const DialogContextProvider: React.FC<DialogProviderProps> = ({
   }, [currentScene, currentIndex, getCurrentScene, getCurrentItem, isTypingComplete, handleTypingComplete, handleSequenceChange, onMessageEnd]);
 
   // 選擇對話選項
-  const handleChoiceSelect = useCallback((next: string) => {
+  const handleChoiceSelect = useCallback((next?: string) => {
     // 跳轉到指定的場景
-    handleSequenceChange(next, 0);
+    if (next) {
+      handleSequenceChange(next, 0);
+      return;
+    }
+    
+    handleSequenceChange(currentScene!, currentIndex + 1);
   }, [handleSequenceChange]);
 
   return (

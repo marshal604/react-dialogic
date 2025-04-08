@@ -10,7 +10,7 @@ interface ChoiceMenuProps {
   /**
    * 選擇選項的回調
    */
-  onSelect: (next: string) => void;
+  onSelect: (next?: string) => void;
 }
 
 /**
