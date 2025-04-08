@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useTypewriter } from '../hooks';
-import '../styles/index.module.css';
+import styles from '../styles/index.module.css';
 
 interface DialogBoxProps {
   /**
@@ -76,7 +76,7 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
 
   return (
     <div
-      className="dialogic-dialog-box"
+      className={styles.dialogBox}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
       tabIndex={0}
@@ -85,17 +85,17 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
     >
       {name && (
         <div
-          className="dialogic-character-name"
+          className={styles.characterName}
           style={textColor ? { color: textColor } : undefined}
         >
           {name}
         </div>
       )}
-      <div className="dialogic-dialog-text">
+      <div className={styles.dialogText}>
         {displayText}
       </div>
       {isComplete && (
-        <div className="dialogic-continue-indicator text-right mt-2 animate-pulse">
+        <div className="text-right mt-2 animate-pulse">
           ▼
         </div>
       )}

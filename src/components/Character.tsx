@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { CharacterConfig } from '../types';
-import '../styles/index.module.css';
+import styles from '../styles/index.module.css';
 
 interface CharacterProps {
   /**
@@ -39,11 +39,11 @@ export const Character: React.FC<CharacterProps> = ({
   const positionClass = useMemo(() => {
     switch (position) {
       case 'left':
-        return 'dialogic-character-left left-8';
+        return 'left-8';
       case 'right':
-        return 'dialogic-character-right right-8';
+        return 'right-8';
       default:
-        return 'dialogic-character-center mx-auto';
+        return 'mx-auto';
     }
   }, [position]);
 
@@ -52,12 +52,12 @@ export const Character: React.FC<CharacterProps> = ({
   
   // 動畫類名
   const animationClass = active 
-    ? 'dialogic-character-enter' 
-    : 'dialogic-character-exit';
+    ? styles.characterEnter 
+    : styles.characterExit;
 
   return (
     <div
-      className={`dialogic-character ${positionClass} ${activeClass} ${animationClass} absolute bottom-0`}
+      className={`${styles.character} ${positionClass} ${activeClass} ${animationClass} absolute bottom-0`}
     >
       <img 
         src={imageUrl} 
