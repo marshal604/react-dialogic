@@ -7,6 +7,7 @@ import postcss from 'rollup-plugin-postcss';
 import dts from 'rollup-plugin-dts';
 
 const packageJson = require('./package.json');
+const isProduction = process.env.NODE_ENV === 'production';
 
 export default [
   {
@@ -15,13 +16,13 @@ export default [
       {
         file: packageJson.main,
         format: 'cjs',
-        sourcemap: true,
+        sourcemap: !isProduction,
         name: 'react-dialogic'
       },
       {
         file: packageJson.module,
         format: 'esm',
-        sourcemap: true
+        sourcemap: !isProduction
       }
     ],
     plugins: [
@@ -39,9 +40,11 @@ export default [
         minimize: true,
         inject: {
           insertAt: 'top'
-        }
+        },
+        gzipSize: true,
+        brotliSize: true,  
       }),
-      terser()
+      terser(),
     ]
   },
   {
