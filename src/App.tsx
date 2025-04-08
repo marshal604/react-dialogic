@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import BasicExample from './pages/Basic';
 import './App.css';
 
@@ -9,7 +9,6 @@ function App() {
       <Router basename="/react-dialogic">
         <Routes>
           <Route path="/" element={<BasicExample />} />
-          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Router>
     </div>
