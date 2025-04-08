@@ -82,7 +82,7 @@ export const Character: React.FC<CharacterProps> = ({
       <img 
         src={imageUrl} 
         alt={config.name} 
-        className={position !== 'center' ? styles.characterSide : "w-full h-auto object-contain"}
+        className={position === 'center' ? "w-full h-auto object-contain" : undefined }
       />
     </div>
   );

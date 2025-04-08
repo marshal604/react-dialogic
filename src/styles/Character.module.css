@@ -1,18 +1,10 @@
 /* Character 元件專用樣式 */
 .character {
   /* 預設尺寸 (桌面版) */
-  max-width: var(--dialogic-character-width-desktop, 20%);
+  max-width: var(--dialogic-character-width-desktop, 33%);
   max-height: var(--dialogic-character-height-desktop, 50vh);
 }
 
-.characterSide {
-  width: auto;
-  height: auto;
-  max-height: var(--dialogic-character-side-height, 90vh);
-  max-width: var(--dialogic-character-side-width, 50%);
-  object-fit: contain;
-  object-position: bottom;
-}
 
 .characterEnter {
   animation-name: var(--dialogic-character-enter, fadeInLeft);
@@ -50,38 +42,23 @@
 /* 平板設備 */
 @media screen and (max-width: 1024px) {
   .character {
-    max-width: var(--dialogic-character-width-tablet, 25%);
+    max-width: var(--dialogic-character-width-tablet, 50%);
     max-height: var(--dialogic-character-height-tablet, 45vh);
-  }
-  
-  .characterSide {
-    max-height: var(--dialogic-character-side-height-tablet, 80vh);
-    max-width: var(--dialogic-character-side-width-tablet, 60%);
   }
 }
 
 /* 手機設備 - 橫向 */
 @media screen and (max-width: 768px) {
   .character {
-    max-width: var(--dialogic-character-width-mobile, 30%);
+    max-width: var(--dialogic-character-width-mobile, 70%);
     max-height: var(--dialogic-character-height-mobile, 40vh);
-  }
-  
-  .characterSide {
-    max-height: var(--dialogic-character-side-height-mobile, 70vh);
-    max-width: var(--dialogic-character-side-width-mobile, 70%);
   }
 }
 
 /* 手機設備 - 直向 */
 @media screen and (max-width: 480px) {
   .character {
-    max-width: var(--dialogic-character-width-mobile, 40%);
+    max-width: var(--dialogic-character-width-mobile, 100%);
     max-height: var(--dialogic-character-height-mobile, 35vh);
-  }
-  
-  .characterSide {
-    max-height: var(--dialogic-character-side-height-mobile-portrait, 60vh);
-    max-width: var(--dialogic-character-side-width-mobile-portrait, 80%);
   }
 } 
