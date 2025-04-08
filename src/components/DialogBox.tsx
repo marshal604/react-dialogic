@@ -58,19 +58,24 @@ export const DialogBox: React.FC<DialogBoxProps> = ({
     }
   }, [isTyping, complete]);
 
-  // 處理點擊事件
-  const handleClick = () => {
+  const triggerComplete = () => {
     if (!isComplete) {
       complete();
     } else {
       onNext?.();
     }
+  }
+  // 處理點擊事件
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    triggerComplete()
   };
 
   // 處理按鍵事件
   const handleKeyDown = (e: React.KeyboardEvent) => {
+    e.preventDefault();
     if (e.key === 'Enter' || e.key === ' ') {
-      handleClick();
+      triggerComplete()
     }
   };
 
