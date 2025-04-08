@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="example-container">
       <button className="back-button absolute top-4 left-4 z-10">Back</button>
-      <Router>
+      <Router basename="/react-dialogic">
         <Routes>
           <Route path="/" element={<BasicExample />} />
           <Route path="*" element={<Navigate to="/" />} />
