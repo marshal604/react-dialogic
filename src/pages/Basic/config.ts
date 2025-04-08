@@ -90,7 +90,9 @@ export const dialogue = {
       
       // 歐陽鋒偷襲小龍女
       { 
+        speaker: 'ouYangFeng',
         text: '（突然間，歐陽鋒偷襲小龍女並點了她的穴道）',
+        position: Position.CENTER
       },
       { 
         speaker: 'xiaoLongNv', 
@@ -115,7 +117,9 @@ export const dialogue = {
         position: Position.CENTER
       },
       { 
-        text: '（尹志平趁機將小龍女的眼睛蒙上）' 
+        speaker: 'yinZhiPing',
+        text: '（尹志平趁機將小龍女的眼睛蒙上）' ,
+        position: Position.RIGHT
       },
       { 
         speaker: 'xiaoLongNv', 
@@ -124,7 +128,9 @@ export const dialogue = {
         position: Position.RIGHT 
       },
       { 
+        speaker: 'yinZhiPing',
         text: '（尹志平將小龍女帶到了偏僻的山洞）',
+        position: Position.CENTER,
         next: 'cave'
       }
     ]
@@ -146,7 +152,9 @@ export const dialogue = {
         position: Position.RIGHT 
       },
       { 
-        text: '（尹志平得逞了，小龍女被玷污）' 
+        speaker: 'yinZhiPing',
+        text: '（尹志平得逞了，小龍女被玷污）',
+        position: Position.CENTER
       },
       { 
         speaker: 'xiaoLongNv', 
@@ -155,12 +163,14 @@ export const dialogue = {
         position: Position.RIGHT 
       },
       { 
-        text: '（楊過發現小龍女失蹤，追蹤找到山洞）' 
+        speaker: 'yangGuo',
+        text: '（楊過發現小龍女失蹤，追蹤找到山洞）',
+        position: Position.CENTER
       },
       { 
         speaker: 'yangGuo', 
         text: '（楊過解開小龍女的蒙眼布，並為她解開穴道）姑姑，你沒事吧？', 
-        position: Position.LEFT 
+        position: Position.RIGHT
       },
       { 
         speaker: 'xiaoLongNv', 
