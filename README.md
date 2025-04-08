@@ -9,7 +9,9 @@
 
 ---
 
-![React-Dialogic Example](https://marshal604.github.io/react-dialogic/)
+[Click here to see Demo](https://marshal604.github.io/react-dialogic/)
+
+![Here is Demo Image](./demo.png)
 
 <details open>
 <summary>繁體中文</summary>
