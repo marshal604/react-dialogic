@@ -1,6 +1,6 @@
 {
   "name": "react-dialogic",
-  "version": "1.2.6",
+  "version": "1.3.0",
   "description": "一個專為 React 應用開發的對話系統 UI 套件，提供類遊戲風格的對話介面",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
