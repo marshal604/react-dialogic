@@ -1,5 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import HomePage from './pages/HomePage';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import BasicExample from './pages/Basic';
 import './App.css';
 
@@ -9,8 +8,8 @@ function App() {
       <button className="back-button absolute top-4 left-4 z-10">Back</button>
       <Router>
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/basic" element={<BasicExample />} />
+          <Route path="/" element={<BasicExample />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Router>
     </div>
