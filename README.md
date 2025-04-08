@@ -11,7 +11,8 @@
 
 [Click here to see Demo](https://marshal604.github.io/react-dialogic/)
 
-![Here is Demo Image](demo.png)
+![Demo Image](https://github.com/user-attachments/assets/a83847fe-1b9e-4274-8a46-fd8c9542d94f)
+
 
 <details open>
 <summary>繁體中文</summary>
