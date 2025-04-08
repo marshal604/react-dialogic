@@ -137,7 +137,7 @@ export const DialogContextProvider: React.FC<DialogProviderProps> = ({
     }
     
     handleSequenceChange(currentScene!, currentIndex + 1);
-  }, [handleSequenceChange]);
+  }, [handleSequenceChange, currentScene, currentIndex]);
 
   return (
     <DialogContext.Provider
