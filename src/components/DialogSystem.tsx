@@ -42,12 +42,12 @@ export const DialogSystem: React.FC = () => {
   };
 
   return (
-    <div className={styles.container} style={{ userSelect: 'none' }}>
+    <div className={`${styles.container} flex flex-col`} style={{ userSelect: 'none' }}>
       {/* 背景 */}
       <Background src={backgroundSrc} />
 
       {/* 角色 */}
-      <div className="relative w-full flex-1">
+      <div className={styles.charactersContainer}>
         {character && (
           <Character
             config={character}

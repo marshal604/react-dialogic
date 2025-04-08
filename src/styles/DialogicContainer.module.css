@@ -13,6 +13,12 @@
   overflow: hidden;
 }
 
+.charactersContainer {
+  position: relative;
+  width: 100%;
+  flex: 1;
+}
+
 .background {
   position: absolute;
   top: 0;
