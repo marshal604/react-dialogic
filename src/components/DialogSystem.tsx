@@ -18,7 +18,8 @@ export const DialogSystem: React.FC = () => {
     characters,
     onMessageStart,
     onMessage,
-    onMessageEnd
+    onMessageEnd,
+    handleTypingComplete
   } = useDialog();
 
   // 獲取當前場景和當前對話項
@@ -66,9 +67,7 @@ export const DialogSystem: React.FC = () => {
             text={currentItem.text}
             textColor={character?.textColor}
             onNext={onNext}
-            onTypingComplete={() => {
-              if (onMessage) onMessage(currentItem);
-            }}
+            onTypingComplete={handleTypingComplete}
           />
 
           {/* 選項 */}
