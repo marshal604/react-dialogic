@@ -52,10 +52,9 @@ export const Character: React.FC<CharacterProps> = ({
         };
       default:
         return {
-          left: '50%',
-          right: 'auto',
-          transform: 'translateX(-50%)',
-          bottom: 'var(--dialogic-character-bottom, 30%)',
+          left: '0',
+          right: '0',
+          margin: 'auto'
         };
     }
   }, [position]);
