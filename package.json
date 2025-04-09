@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "react": "^19.0.0",
-    "react-dialogic": "^1.5.2",
+    "react-dialogic": "^1.5.3",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.5.0"
   },
