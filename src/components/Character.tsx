@@ -55,7 +55,7 @@ export const Character: React.FC<CharacterProps> = ({
           left: '50%',
           right: 'auto',
           transform: 'translateX(-50%)',
-          bottom: 'var(--dialogic-character-bottom, 0)',
+          bottom: 'var(--dialogic-character-bottom, 30%)',
         };
     }
   }, [position]);
