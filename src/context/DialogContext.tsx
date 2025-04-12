@@ -1,5 +1,6 @@
-import React, { createContext, useContext, useState, useCallback, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useCallback, ReactNode, useEffect } from 'react';
 import { SequenceItem, DialogueConfig, CharacterConfig, Scene } from '../types';
+import { imagePreloader } from '../utils/imagePreloader';
 
 interface DialogContextType {
   currentScene: string | null;
@@ -43,6 +44,76 @@ interface DialogProviderProps {
 }
 
 /**
+ * 預載場景中的所有圖片
+ */
+const preloadSceneImages = (
+  sceneId: string, 
+  dialogue: DialogueConfig, 
+  characters: Record<string, CharacterConfig>
+) => {
+  const scene = dialogue[sceneId];
+  if (!scene) return;
+
+  const imagesToPreload: string[] = [];
+  
+  // 添加場景背景
+  if (scene.background) {
+    imagesToPreload.push(scene.background);
+  }
+  
+  // 添加所有對話項中的背景和角色圖片
+  scene.sequence.forEach(item => {
+    // 背景圖片
+    if (item.background) {
+      imagesToPreload.push(item.background);
+    }
+    
+    // 角色圖片
+    if (item.speaker && characters[item.speaker]) {
+      const character = characters[item.speaker];
+      const emotion = item.emotion || 'default';
+      
+      // 添加角色當前情緒的圖片
+      if (character.images[emotion]) {
+        imagesToPreload.push(character.images[emotion]);
+      }
+      
+      // 如果情緒不是default，同時預載default圖片作為備用
+      if (emotion !== 'default' && character.images.default) {
+        imagesToPreload.push(character.images.default);
+      }
+    }
+  });
+  
+  // 預載下一個可能的場景
+  scene.sequence.forEach(item => {
+    if (item.next && dialogue[item.next]) {
+      // 只預載下一個場景的背景圖片
+      const nextScene = dialogue[item.next];
+      if (nextScene.background) {
+        imagesToPreload.push(nextScene.background);
+      }
+    }
+
+    // 預載選項可能跳轉的場景背景
+    if (item.choices) {
+      item.choices.forEach(choice => {
+        if (choice.next && dialogue[choice.next]) {
+          const nextScene = dialogue[choice.next];
+          if (nextScene.background) {
+            imagesToPreload.push(nextScene.background);
+          }
+        }
+      });
+    }
+  });
+  
+  // 執行圖片預載
+  imagePreloader.preloadImages(imagesToPreload)
+    .catch(error => console.error('Failed to preload images:', error));
+};
+
+/**
  * 對話系統上下文提供者
  */
 export const DialogContextProvider: React.FC<DialogProviderProps> = ({
@@ -73,6 +144,9 @@ export const DialogContextProvider: React.FC<DialogProviderProps> = ({
 
   // 當對話項變化時觸發onMessageStart
   const handleSequenceChange = useCallback((sceneId: string, index: number) => {
+    // 預載當前場景圖片
+    preloadSceneImages(sceneId, dialogue, characters);
+    
     setCurrentScene(sceneId);
     setCurrentIndex(index);
     setIsTypingComplete(false);
@@ -81,7 +155,7 @@ export const DialogContextProvider: React.FC<DialogProviderProps> = ({
     if (scene && scene.sequence && scene.sequence[index] && onMessageStart) {
       onMessageStart(scene.sequence[index]);
     }
-  }, [dialogue, onMessageStart]);
+  }, [dialogue, characters, onMessageStart]);
 
   // 完成打字效果時觸發onMessage
   const handleTypingComplete = useCallback(() => {
@@ -143,6 +217,15 @@ export const DialogContextProvider: React.FC<DialogProviderProps> = ({
     
     handleSequenceChange(currentScene!, currentIndex + 1);
   }, [handleSequenceChange, currentScene, currentIndex]);
+
+
+  // 初始化時預載起始場景
+  useEffect(() => {
+    if (startScene) {
+      preloadSceneImages(startScene, dialogue, characters);
+    }
+  }, [startScene, dialogue, characters]);
+  
 
   return (
     <DialogContext.Provider
