@@ -124,6 +124,11 @@ export const DialogContextProvider: React.FC<DialogProviderProps> = ({
 
       if (currentItem.next) {
         handleSequenceChange(currentItem.next, 0);
+      } else {
+        // 如果沒有下一個場景，則重置當前場景和索引，使對話框消失
+        setCurrentScene(null);
+        setCurrentIndex(0);
+        setIsTypingComplete(false);
       }
     }
   }, [currentScene, currentIndex, getCurrentScene, getCurrentItem, isTypingComplete, handleTypingComplete, handleSequenceChange, onMessageEnd]);
