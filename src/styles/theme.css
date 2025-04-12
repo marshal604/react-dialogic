@@ -5,8 +5,9 @@
   --dialogic-dialog-border: #FFCC00;
   --dialogic-dialog-text: #FFFFFF;
   --dialogic-name-text: #FFCC00;
+  --dialogic-choice-border: #FFCC00;
   --dialogic-choice-bg: rgba(0, 0, 0, 0.7);
-  --dialogic-choice-bg-hover: rgba(255, 204, 0, 0.3);
+  --dialogic-choice-bg-hover: rgba(70, 70, 70, 0.8);
   --dialogic-choice-text: #FFFFFF;
   --dialogic-choice-text-hover: #FFCC00;
   

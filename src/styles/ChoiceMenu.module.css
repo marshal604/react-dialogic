@@ -4,6 +4,7 @@
 }
 
 .choiceItem {
+  border: 1px solid var(--dialogic-choice-border);
   background-color: var(--dialogic-choice-bg);
   color: var(--dialogic-choice-text);
   border-radius: var(--dialogic-choice-radius);
