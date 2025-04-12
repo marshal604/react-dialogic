@@ -246,8 +246,8 @@ function App() {
         dialogue={dialogue}
         startScene="start"
         onMessageStart={handleMessageStart}
-        onMessage={handleMessage}
-        onMessageEnd={handleMessageEnd}
+        onMessageEnd={handleMessage}
+        onSceneEnd={handleMessageEnd}
       />
     </div>
   );
@@ -573,8 +573,8 @@ function App() {
         dialogue={dialogue}
         startScene="start"
         onMessageStart={handleMessageStart}
-        onMessage={handleMessage}
-        onMessageEnd={handleMessageEnd}
+        onMessageEnd={handleMessage}
+        onSceneEnd={handleMessageEnd}
       />
     </div>
   );
