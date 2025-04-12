@@ -11,28 +11,19 @@ import styles from '../styles/DialogicContainer.module.css';
  */
 export const DialogSystem: React.FC = () => {
   const {
-    getCurrentItem,
-    getCurrentScene,
+    scene,
+    item,
+    character,
+    background,
     handleNext,
     handleChoiceSelect,
-    characters,
     handleTypingComplete
   } = useDialog();
 
-  // 獲取當前場景和當前對話項
-  const currentScene = getCurrentScene();
-  const currentItem = getCurrentItem();
-
   // 如果沒有當前場景或對話項，則不渲染
-  if (!currentScene || !currentItem) {
+  if (!scene || !item) {
     return null;
   }
-
-  // 獲取背景（優先使用當前對話項的背景，其次使用場景背景）
-  const backgroundSrc = currentItem.background || currentScene.background;
-
-  // 獲取角色（如果對話項有指定角色的話）
-  const character = currentItem.speaker ? characters[currentItem.speaker] : null;
 
   const onNext = () => {
     handleNext();
@@ -41,24 +32,24 @@ export const DialogSystem: React.FC = () => {
   return (
     <div className={`${styles.container} flex flex-col`} style={{ userSelect: 'none' }}>
       {/* 背景 */}
-      <Background src={backgroundSrc} />
+      <Background src={background || undefined} />
 
       {/* 角色顯示區域 */}
       <div className={styles.charactersContainer}>
         {character && (
           <Character
             config={character}
-            emotion={currentItem.emotion}
-            position={currentItem.position || character.defaultPosition}
+            emotion={item.emotion}
+            position={item.position || character.defaultPosition}
             active={true}
           />
         )}
       </div>
 
       {/* 選項 */}
-      {currentItem.choices && (
+      {item.choices && (
         <ChoiceMenu
-          choices={currentItem.choices}
+          choices={item.choices}
           onSelect={handleChoiceSelect}
         />
       )}
@@ -68,7 +59,7 @@ export const DialogSystem: React.FC = () => {
         <div className="w-full max-w-5xl mx-auto px-4 mb-4">
           <DialogBox
             name={character?.name}
-            text={currentItem.text}
+            text={item.text}
             textColor={character?.textColor}
             onNext={onNext}
             onTypingComplete={handleTypingComplete}
