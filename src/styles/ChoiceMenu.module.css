@@ -2,12 +2,12 @@
 .choices {
   position: absolute;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  left: 0;
+  transform: translate(0, -50%);
   z-index: 100;
   border-radius: 8px;
-  min-width: 280px;
-  max-width: 80%;
+  background-color: var(--dialogic-choice-box-bg);
+  padding: 3rem 0;
 }
 
 .choiceItem {
@@ -17,12 +17,17 @@
   border-radius: var(--dialogic-choice-radius);
   font-family: var(--dialogic-font-choice);
   padding: 0.75rem 1rem;
-  margin-bottom: 0.5rem;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   width: 100%;
+  min-width: 280px;
+  max-width: 80%;
   text-align: center;
   display: block;
+}
+
+.choiceItem:not(:first-child) {
+  margin-top: 0.5rem;
 }
 
 .choiceItem:hover {
