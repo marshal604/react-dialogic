@@ -1,7 +1,11 @@
-import { ReactDialogic, SequenceItem } from 'react-dialogic';
+import { useState } from 'react';
+import { ReactDialogic, SequenceItem, CharacterConfig, DialogueConfig } from 'react-dialogic';
 import { characters, dialogue } from './config';
 
 function BasicExample() {
+  const [currentCharacter, setCurrentCharacter] = useState<Record<string, CharacterConfig>>(characters);
+  const [currentDialogue, setCurrentDialogue] = useState<DialogueConfig>(dialogue);
+
   // 事件處理函數
   const handleMessageStart = (item: SequenceItem) => {
     console.log('對話開始:', item);
@@ -16,14 +20,16 @@ function BasicExample() {
   };
 
   const handleDialogueEnd = () => {
-    console.log('全部對話結束');
+    alert('全部對話結束 / 重置對話');
+    setCurrentCharacter({ ...characters });
+    setCurrentDialogue({ ...dialogue });
   };
 
   return (
     <div className="app">
       <ReactDialogic 
-        characters={characters}
-        dialogue={dialogue}
+        characters={currentCharacter}
+        dialogue={currentDialogue}
         startScene="mountain"
         onMessageStart={handleMessageStart}
         onMessageEnd={handleMessageEnd}

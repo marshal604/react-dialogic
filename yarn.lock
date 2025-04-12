@@ -1543,10 +1543,10 @@ queue-microtask@^1.2.2:
   resolved "https://registry.npmjs.org/queue-microtask/-/queue-microtask-1.2.3.tgz"
   integrity sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==
 
-react-dialogic@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/react-dialogic/-/react-dialogic-2.0.1.tgz#8466683ffde99083b399cbf02397142b152f8a75"
-  integrity sha512-Q4Tr6dxXGH/q31zMY0am1o5rKJmjSpXJ2pQlgOq903B33Bu/1TES5S5yPnyk9WEAu82Y5oNwnCGBI6UUM4/PmQ==
+react-dialogic@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/react-dialogic/-/react-dialogic-2.0.2.tgz#c3b8c2b69b7f85d0c6cab068946ec4a78a806b96"
+  integrity sha512-cEnELiuBPdIgeGVNHkxjms8YIpPRmWjR4Qasd/OIaD/O6c1A3Js75qjxuxjJfiq6QXtZCjRzrGqA3nbVaRHBxg==
   dependencies:
     clsx "^1.1.1"
 

@@ -1,3 +1,4 @@
+import { CharacterConfig, DialogueConfig } from 'react-dialogic';
 import 楊過 from './images/楊過.png'
 import 小龍女 from './images/小龍女.png'
 import 矇眼的小龍女 from './images/矇眼的小龍女.png'
@@ -14,7 +15,7 @@ const Position = {
 } as const;
 
 // 角色配置
-export const characters = {
+export const characters: Record<string, CharacterConfig> = {
   yangGuo: {
     name: '楊過',
     images: {
@@ -51,7 +52,7 @@ export const characters = {
 };
 
 // 新格式的對話配置
-export const dialogue = {
+export const dialogue: DialogueConfig = {
   // 場景一：鐘南山修練
   mountain: {
     background: 草原背景,
