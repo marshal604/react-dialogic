@@ -28,6 +28,10 @@ export interface ReactDialogicProps {
    * 對話流結束的回調
    */
   onSceneEnd?: (item: SequenceItem) => void;
+  /**
+   * 對話結束的回調
+   */
+  onDialogueEnd?: () => void;
 }
 
 /**
@@ -50,6 +54,7 @@ export const ReactDialogic: React.FC<ReactDialogicProps> = ({
       onMessageStart={onMessageStart}
       onMessageEnd={onMessageEnd}
       onSceneEnd={onSceneEnd}
+      onDialogueEnd={onDialogueEnd}
     >
       <DialogSystem />
     </DialogContextProvider>

@@ -39,6 +39,7 @@ interface DialogProviderProps {
   onMessageStart?: (item: SequenceItem) => void;
   onMessageEnd?: (item: SequenceItem) => void;
   onSceneEnd?: (item: SequenceItem) => void;
+  onDialogueEnd?: () => void;
 }
 
 /**
@@ -51,7 +52,8 @@ export const DialogContextProvider: React.FC<DialogProviderProps> = ({
   startScene,
   onMessageStart,
   onMessageEnd,
-  onSceneEnd
+  onSceneEnd,
+  onDialogueEnd
 }) => {
   const [currentScene, setCurrentScene] = useState<string | null>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
@@ -204,14 +206,18 @@ export const DialogContextProvider: React.FC<DialogProviderProps> = ({
 
       if (item.next) {
         handleSequenceChange(item.next, 0);
-      } else {
-        // 如果沒有下一個場景，則重置當前場景和索引，使對話框消失
+      } else {        
+        // 重置當前場景和索引，使對話框消失
         setCurrentScene(null);
         setCurrentIndex(0);
         setIsTypingComplete(false);
+        // 如果沒有下一個場景，則整個對話結束
+        if (onDialogueEnd) {
+          onDialogueEnd();
+        }
       }
     }
-  }, [currentScene, currentIndex, scene, item, isTypingComplete, handleTypingComplete, handleSequenceChange, onSceneEnd]);
+  }, [currentScene, currentIndex, scene, item, isTypingComplete, handleTypingComplete, handleSequenceChange, onSceneEnd, onDialogueEnd]);
 
   // 選擇對話選項
   const handleChoiceSelect = useCallback((next?: string) => {
