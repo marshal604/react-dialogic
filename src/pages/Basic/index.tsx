@@ -1,4 +1,3 @@
-import React from 'react';
 import { ReactDialogic, SequenceItem } from 'react-dialogic';
 import { characters, dialogue } from './config';
 
@@ -8,12 +7,12 @@ function BasicExample() {
     console.log('對話開始:', item);
   };
   
-  const handleMessage = (item: SequenceItem) => {
-    console.log('對話進行中:', item);
-  };
-  
   const handleMessageEnd = (item: SequenceItem) => {
     console.log('對話結束:', item);
+  };
+  
+  const handleSceneEnd = (item: SequenceItem) => {
+    console.log('場景結束:', item);
   };
 
   return (
@@ -23,8 +22,8 @@ function BasicExample() {
         dialogue={dialogue}
         startScene="mountain"
         onMessageStart={handleMessageStart}
-        onMessageEnd={handleMessage}
-        onSceneEnd={handleMessageEnd}
+        onMessageEnd={handleMessageEnd}
+        onSceneEnd={handleSceneEnd}
       />
     </div>
   );

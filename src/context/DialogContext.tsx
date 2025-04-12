@@ -37,8 +37,8 @@ interface DialogProviderProps {
   characters: Record<string, CharacterConfig>;
   startScene?: string;
   onMessageStart?: (item: SequenceItem) => void;
-  onMessage?: (item: SequenceItem) => void;
   onMessageEnd?: (item: SequenceItem) => void;
+  onSceneEnd?: (item: SequenceItem) => void;
 }
 
 /**
@@ -50,8 +50,8 @@ export const DialogContextProvider: React.FC<DialogProviderProps> = ({
   characters,
   startScene,
   onMessageStart,
-  onMessage,
-  onMessageEnd
+  onMessageEnd,
+  onSceneEnd
 }) => {
   const [currentScene, setCurrentScene] = useState<string | null>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
@@ -170,10 +170,10 @@ export const DialogContextProvider: React.FC<DialogProviderProps> = ({
   // 完成打字效果時觸發onMessage
   const handleTypingComplete = useCallback(() => {
     setIsTypingComplete(true);
-    if (item && onMessage) {
-      onMessage(item);
+    if (item && onMessageEnd) {
+      onMessageEnd(item);
     }
-  }, [item, onMessage]);
+  }, [item, onMessageEnd]);
 
   // 前進到下一個對話項
   const handleNext = useCallback(() => {
@@ -198,8 +198,8 @@ export const DialogContextProvider: React.FC<DialogProviderProps> = ({
     } 
     // 如果是序列的最後一項且沒有選項，則對話結束
     else {
-      if (onMessageEnd) {
-        onMessageEnd(item);
+      if (onSceneEnd) {
+        onSceneEnd(item);
       }
 
       if (item.next) {
@@ -211,7 +211,7 @@ export const DialogContextProvider: React.FC<DialogProviderProps> = ({
         setIsTypingComplete(false);
       }
     }
-  }, [currentScene, currentIndex, scene, item, isTypingComplete, handleTypingComplete, handleSequenceChange, onMessageEnd]);
+  }, [currentScene, currentIndex, scene, item, isTypingComplete, handleTypingComplete, handleSequenceChange, onSceneEnd]);
 
   // 選擇對話選項
   const handleChoiceSelect = useCallback((next?: string) => {
