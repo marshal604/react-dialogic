@@ -5,9 +5,9 @@
   left: 0;
   transform: translate(0, -50%);
   z-index: 100;
-  border-radius: 8px;
   background-color: var(--dialogic-choice-box-bg);
-  padding: 3rem 0;
+  padding: 2rem 0;
+  width: 100%;
 }
 
 .choiceItem {
@@ -24,6 +24,7 @@
   max-width: 80%;
   text-align: center;
   display: block;
+  margin: auto;
 }
 
 .choiceItem:not(:first-child) {
