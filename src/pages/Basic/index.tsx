@@ -7,12 +7,16 @@ function BasicExample() {
     console.log('對話開始:', item);
   };
   
-  const handleMessage = (item: SequenceItem) => {
-    console.log('對話進行中:', item);
-  };
-  
   const handleMessageEnd = (item: SequenceItem) => {
     console.log('對話結束:', item);
+  };
+
+  const handleSceneEnd = (item: SequenceItem) => {
+    console.log('場景結束:', item);
+  };
+
+  const handleDialogueEnd = () => {
+    console.log('全部對話結束');
   };
 
   return (
@@ -22,8 +26,9 @@ function BasicExample() {
         dialogue={dialogue}
         startScene="mountain"
         onMessageStart={handleMessageStart}
-        onMessage={handleMessage}
         onMessageEnd={handleMessageEnd}
+        onSceneEnd={handleSceneEnd}
+        onAllDialogueEnd={handleDialogueEnd}
       />
     </div>
   );
