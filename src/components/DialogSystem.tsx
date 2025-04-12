@@ -55,7 +55,15 @@ export const DialogSystem: React.FC = () => {
         )}
       </div>
 
-      {/* 底部區域：對話框和選項 */}
+      {/* 選項 */}
+      {currentItem.choices && (
+        <ChoiceMenu
+          choices={currentItem.choices}
+          onSelect={handleChoiceSelect}
+        />
+      )}
+
+      {/* 底部區域：對話框 */}
       <div className={styles.dialogArea}>
         <div className="w-full max-w-5xl mx-auto px-4 mb-4">
           <DialogBox
@@ -65,14 +73,6 @@ export const DialogSystem: React.FC = () => {
             onNext={onNext}
             onTypingComplete={handleTypingComplete}
           />
-
-          {/* 選項 */}
-          {currentItem.choices && (
-            <ChoiceMenu
-              choices={currentItem.choices}
-              onSelect={handleChoiceSelect}
-            />
-          )}
         </div>
       </div>
     </div>

@@ -1,6 +1,15 @@
 /* ChoiceMenu 元件專用樣式 */
 .choices {
-  margin-top: 1rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 1.5rem;
+  border-radius: 8px;
+  min-width: 280px;
+  max-width: 80%;
 }
 
 .choiceItem {
@@ -13,6 +22,9 @@
   margin-bottom: 0.5rem;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+  width: 100%;
+  text-align: left;
+  display: block;
 }
 
 .choiceItem:hover {
