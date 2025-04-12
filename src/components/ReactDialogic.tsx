@@ -1,5 +1,5 @@
 import React from 'react';
-import { DialogProvider } from './DialogProvider';
+import { DialogContextProvider } from '../context/DialogContext';
 import { DialogSystem } from './DialogSystem';
 import { DialogueConfig, CharacterConfig, SequenceItem } from '../types';
 
@@ -32,7 +32,7 @@ export interface ReactDialogicProps {
 
 /**
  * React Dialogic 統一入口組件
- * 將 DialogProvider 和 DialogSystem 封裝在一起，提供更簡單的使用方式
+ * 將 DialogContextProvider 和 DialogSystem 封裝在一起，提供更簡單的使用方式
  */
 export const ReactDialogic: React.FC<ReactDialogicProps> = ({
   characters,
@@ -43,7 +43,7 @@ export const ReactDialogic: React.FC<ReactDialogicProps> = ({
   onMessageEnd
 }) => {
   return (
-    <DialogProvider
+    <DialogContextProvider
       characters={characters}
       dialogue={dialogue}
       startScene={startScene}
@@ -52,6 +52,6 @@ export const ReactDialogic: React.FC<ReactDialogicProps> = ({
       onMessageEnd={onMessageEnd}
     >
       <DialogSystem />
-    </DialogProvider>
+    </DialogContextProvider>
   );
 };
