@@ -1,81 +1,75 @@
 # React-Dialogic
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-0.1.0-blue.svg" alt="version">
+  <img src="https://img.shields.io/badge/version-2.x.x-blue.svg" alt="version">
   <img src="https://img.shields.io/badge/license-MIT-green.svg" alt="license">
 </p>
 
-<p align="center">一個專為 React 應用開發的對話系統 UI 套件<br>A dialogue system UI kit for React applications</p>
+<p align="center">
+  一個專為 React 應用開發的對話系統 UI 套件，提供類遊戲風格的對話介面<br>
+  A dialogue system UI kit for React applications with game-style interface
+</p>
 
 ---
 
-[Click here to see Demo](https://marshal604.github.io/react-dialogic/)
+## 介紹 Introduction
 
-![Demo Image](https://github.com/user-attachments/assets/a83847fe-1b9e-4274-8a46-fd8c9542d94f)
+React-Dialogic 是一個功能完整的 React 對話系統元件庫，專為建立互動式對話體驗而設計。無論是視覺小說、游戲對話、教學引導還是角色驅動的用戶界面，本套件都能提供令人印象深刻的對話流程。
 
+React-Dialogic is a comprehensive React dialogue system component library designed for creating interactive dialogue experiences. Whether for visual novels, game dialogues, onboarding tutorials, or character-driven interfaces, this library provides engaging conversation flows.
 
-<details open>
-<summary>繁體中文</summary>
+[📺 Live Demo](https://marshal604.github.io/react-dialogic/)
 
-## 功能目的
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/a83847fe-1b9e-4274-8a46-fd8c9542d94f" alt="React-Dialogic - 展示對話框、角色和選項介面" width="80%">
+</p>
 
-React-Dialogic 旨在提供一個易於集成且功能豐富的對話系統，可用於：
+## ✨ 主要特性 Key Features
 
-- 視覺小說和互動遊戲
-- 教學指引和用戶引導
-- 互動式故事敘述
-- 角色驅動的用戶介面
-- 任何需要對話框和角色互動的應用
+### 🖥️ 沉浸式顯示系統 Immersive Display System
+- 組件初始化時自動佔滿整個視窗/容器 | Components automatically fill the entire container
+- 響應式設計，適配不同屏幕尺寸 | Responsive design for all screen sizes
 
-## 主要特性
+### 👥 角色配置系統 Character Configuration
+- 支援設定角色信息（名稱、圖片、顏色等）| Support for character settings (name, images, colors)
+- 多個表情/狀態的圖片管理 | Multiple emotion/state image management 
+- 角色在對話中的位置控制 | Character positioning control
 
-### 1. 滿版顯示系統
-- 組件初始化時自動佔滿整個視窗/容器
-- 提供沉浸式體驗，背景填充整個視圖
-- 響應式設計，適配不同屏幕尺寸和設備
+### 💬 對話框系統 Dialogue Box System
+- 打字機效果逐字顯示文本 | Typewriter effect for text display
+- 可調整文字顯示速度 | Adjustable text display speed
+- 支援文字特效和停頓 | Support for text effects and pauses
 
-### 2. 人物配置系統
-- 支援設定角色信息（ID、名稱、圖片、聲音等）
-- 多個表情/狀態的圖片管理
-- 自定義角色文字顏色和顯示速度
-- 角色在對話中的位置控制（左/右側）
+### 🔄 選項系統 Choice System
+- 支援對話選項分支 | Support for dialogue branching options
+- 選項結果影響後續對話流程 | Choices affecting dialogue flow
+- 條件性選項顯示 | Conditional option display
 
-### 3. 對話框系統
-- 底部顯示對話文字區域
-- 打字機效果逐字顯示文本
-- 可調整文字顯示速度
-- 支援文字特效和停頓
+### 🎨 主題系統 Theme System
+- 支援自定義主題配置 | Support for custom theme configuration
 
-### 4. 選項系統
-- 支援對話選項分支
-- 選項結果影響後續對話流程
-- 自定義選項樣式和效果
-- 條件性選項顯示
+### 🏞️ 背景管理 Background Management
+- 自定義背景圖片或顏色 | Custom background images or colors
+- 背景轉場效果 | Background transition effects
 
-### 5. 主題系統
-- 預設多種主題風格
-- 支援自定義主題配置
-- 運行時動態切換主題
-- 統一調整整體色系和風格
+### 🔌 事件鉤子系統 Event Hook System
+- 完整的事件處理機制 | Comprehensive event handling
+- 自定義事件處理和遊戲邏輯整合 | Custom game logic integration
 
-### 6. 背景管理
-- 自定義背景圖片或顏色
-- 背景轉場效果
-- 透明背景選項，適應不同場景
+---
 
-### 7. 事件鉤子系統
-- `onMessageStart` - 對話節點開始時觸發
-- `onMessage` - 對話節點結束時觸發
-- `onMessageEnd` - 對話流結束時觸發（無next屬性時）
-- 自定義事件處理和遊戲邏輯整合
-
-## 安裝
+## 📦 安裝 Installation
 
 ```bash
 npm install react-dialogic
-# 或
+# 或/or
 yarn add react-dialogic
 ```
+
+---
+
+<details>
+<summary>🇹🇼 繁體中文使用指南</summary>
 
 ## 基本用法
 
@@ -378,73 +372,31 @@ React Dialogic 使用 CSS 變量來控制組件的外觀。您可以通過以下
 
 - React 16.8+
 - Tailwind CSS
-- 可選：Three.js（進階動畫效果）
-- 可選：Anime.js（進階動畫效果）
+
+
+## 應用場景
+
+React-Dialogic 特別適合以下應用場景：
+
+- **視覺小說和互動式遊戲**：建立角色對話和情節分支
+- **教學引導和使用者導覽**：透過角色引導用戶了解產品功能
+- **互動式故事敘述**：創建引人入勝的故事體驗
+- **角色驅動的用戶介面**：將應用程式介面擬人化
+- **教育應用**：建立互動式教學內容
+- **客戶服務聊天界面**：開發有個性的客服對話介面
+- **產品展示**：透過對話方式介紹產品特點
+
+## 支援與貢獻
+
+- **問題報告**：如發現問題，請在 GitHub Issues 頁面提交
+- **功能請求**：歡迎提出新功能建議
+- **代碼貢獻**：請參閱貢獻指南提交 Pull Request
+- **文檔改進**：幫助我們完善文檔
 
 </details>
 
 <details>
-<summary>English</summary>
-
-## Purpose
-
-React-Dialogic aims to provide an easy-to-integrate and feature-rich dialogue system for:
-
-- Visual novels and interactive games
-- Tutorials and user onboarding flows
-- Interactive storytelling
-- Character-driven user interfaces
-- Any application requiring dialogue boxes and character interactions
-
-## Key Features
-
-### 1. Fullscreen Display System
-- Components automatically fill the entire window/container on initialization
-- Provides an immersive experience with background filling the entire view
-- Responsive design adapting to different screen sizes and devices
-
-### 2. Character Configuration System
-- Support for character information settings (ID, name, images, sounds, etc.)
-- Multiple emotion/state image management
-- Custom character text color and display speed
-- Character positioning control (left/right side)
-
-### 3. Dialogue Box System
-- Bottom-anchored text display area
-- Typewriter effect for character-by-character text display
-- Adjustable text display speed
-- Support for text effects and pauses
-
-### 4. Choice System
-- Support for dialogue option branches
-- Choice results affecting subsequent dialogue flow
-- Custom option styling and effects
-- Conditional option display
-
-### 5. Theme System
-- Multiple preset theme styles
-- Support for custom theme configuration
-- Runtime dynamic theme switching
-- Unified adjustment of overall color schemes and styles
-
-### 6. Background Management
-- Custom background images or colors
-- Background transition effects
-- Transparent background option for different contexts
-
-### 7. Event Hook System
-- `onMessageStart` - Triggered when a dialogue node begins
-- `onMessage` - Triggered when a dialogue node ends
-- `onMessageEnd` - Triggered when the dialogue flow ends (when no next property is present)
-- Custom event handling and game logic integration
-
-## Installation
-
-```bash
-npm install react-dialogic
-# or
-yarn add react-dialogic
-```
+<summary>🇬🇧 English Usage Guide</summary>
 
 ## Basic Usage
 
@@ -500,18 +452,18 @@ const dialogue = {
       // Character dialogue
       { 
         speaker: 'yangGuo', 
-        text: 'Master, what skills shall we practice today?', 
+        text: 'Aunt, what martial arts are we practicing today?', 
         position: Position.LEFT 
       },
       { 
         speaker: 'xiaoLongNv', 
-        text: 'Today we will practice the Jade Maiden Heart Sutra.', 
+        text: 'We will practice the Jade Maiden Heart Sutra today.', 
         position: Position.RIGHT 
       },
       
       // Narration - no character specified
       { 
-        text: '(The two arrived at the training area)' 
+        text: '(They arrive at the training ground)' 
       },
       
       // Choice branch
@@ -519,8 +471,8 @@ const dialogue = {
         speaker: 'xiaoLongNv',
         text: 'Which part would you like to practice first?',
         choices: [
-          { text: 'Inner power cultivation', next: 'innerPower' },
-          { text: 'Sword techniques', next: 'swordSkills' }
+          { text: 'Inner Power Techniques', next: 'innerPower' },
+          { text: 'Sword Skills', next: 'swordSkills' }
         ]
       }
     ]
@@ -532,12 +484,12 @@ const dialogue = {
     sequence: [
       { 
         speaker: 'xiaoLongNv', 
-        text: 'Let us sit in meditation to cultivate inner power.', 
+        text: 'Let us meditate first to cultivate inner power.', 
         position: Position.RIGHT 
       },
       { 
         speaker: 'yangGuo', 
-        text: 'Yes, master.', 
+        text: 'Yes, Aunt.', 
         position: Position.LEFT 
       },
       // Next scene
@@ -554,12 +506,12 @@ const dialogue = {
     sequence: [
       { 
         speaker: 'xiaoLongNv', 
-        text: 'Take your sword and let us practice sword techniques.', 
+        text: 'Take your sword, let us practice sword techniques.', 
         position: Position.RIGHT 
       },
       { 
         speaker: 'yangGuo', 
-        text: 'As you command, master.', 
+        text: 'As you command, Aunt.', 
         position: Position.LEFT 
       },
       // Next scene
@@ -576,15 +528,15 @@ const dialogue = {
     sequence: [
       { 
         speaker: 'xiaoLongNv', 
-        text: 'That\'s enough practice for today.', 
+        text: 'That concludes our training for today.', 
         position: Position.RIGHT 
       },
       { 
         speaker: 'yangGuo', 
-        text: 'Thank you for your guidance, master.', 
+        text: 'Thank you for your guidance, Aunt.', 
         position: Position.LEFT 
       }
-      // No next property, dialogue ends
+      // No next, dialogue ends
     ]
   }
 };
@@ -598,9 +550,9 @@ import { ReactDialogic } from 'react-dialogic';
 import 'react-dialogic/dist/styles.css';
 
 function App() {
-  // Event handlers
+  // Event handler functions
   const handleMessageStart = (item) => {
-    console.log('Dialogue start:', item);
+    console.log('Dialogue started:', item);
     // Can trigger sound effects, animations, or update game state
   };
   
@@ -610,8 +562,8 @@ function App() {
   };
   
   const handleMessageEnd = (item) => {
-    console.log('Dialogue end:', item);
-    // Can return to main game flow or trigger subsequent events
+    console.log('Dialogue ended:', item);
+    // Can return to game main flow or trigger subsequent events
   };
 
   return (
@@ -631,7 +583,7 @@ function App() {
 export default App;
 ```
 
-### Step 5: Image Imports (When Using Bundlers like Webpack)
+### Step 5: Image Imports (when using bundlers like Webpack)
 
 If you're using bundlers like Webpack, you can import local images directly:
 
@@ -674,7 +626,7 @@ const dialogue = {
 
 ## Custom Themes
 
-React Dialogic uses CSS variables to control the appearance of components. You can customize the theme in the following ways:
+React Dialogic uses CSS variables to control component appearance. You can customize themes in the following ways:
 
 ### Method 1: Override CSS Variables
 
@@ -719,24 +671,24 @@ Here are the available CSS variables and their purposes:
 
 | Variable Name | Description | Default Value |
 |--------|------|--------|
-| `--dialogic-dialog-bg` | Dialog background color | rgba(0, 0, 0, 0.8) |
-| `--dialogic-dialog-border` | Dialog border color | #FFCC00 |
+| `--dialogic-dialog-bg` | Dialog box background color | rgba(0, 0, 0, 0.8) |
+| `--dialogic-dialog-border` | Dialog box border color | #FFCC00 |
 | `--dialogic-dialog-text` | Dialog text color | #FFFFFF |
 | `--dialogic-name-text` | Character name color | #FFCC00 |
-| `--dialogic-choice-bg` | Choice background color | rgba(0, 0, 0, 0.7) |
-| `--dialogic-choice-bg-hover` | Choice hover background color | rgba(255, 204, 0, 0.3) |
-| `--dialogic-choice-text` | Choice text color | #FFFFFF |
-| `--dialogic-choice-text-hover` | Choice hover text color | #FFCC00 |
-| `--dialogic-font-dialog` | Dialog font | 'Press Start 2P', system-ui, sans-serif |
-| `--dialogic-font-choice` | Choice font | 'Press Start 2P', system-ui, sans-serif |
+| `--dialogic-choice-bg` | Choice option background color | rgba(0, 0, 0, 0.7) |
+| `--dialogic-choice-bg-hover` | Choice option hover background color | rgba(255, 204, 0, 0.3) |
+| `--dialogic-choice-text` | Choice option text color | #FFFFFF |
+| `--dialogic-choice-text-hover` | Choice option hover text color | #FFCC00 |
+| `--dialogic-font-dialog` | Dialog box font | 'Press Start 2P', system-ui, sans-serif |
+| `--dialogic-font-choice` | Choice option font | 'Press Start 2P', system-ui, sans-serif |
 | `--dialogic-typewriter-speed` | Typewriter effect speed | 40ms |
-| `--dialogic-dialog-radius` | Dialog border radius | 4px |
-| `--dialogic-choice-radius` | Choice border radius | 2px | 
+| `--dialogic-dialog-radius` | Dialog box border radius | 4px |
+| `--dialogic-choice-radius` | Choice option border radius | 2px | 
 
-## More Features
+## Additional Features
 
-- Character entry/exit animations
-- Dialogue box appearance/disappearance effects
+- Character enter/exit animations
+- Dialog box appearance/disappearance effects
 - Background transition effects
 - Sound effects and voice support
 - Custom event hooks
@@ -747,11 +699,34 @@ Here are the available CSS variables and their purposes:
 
 - React 16.8+
 - Tailwind CSS
-- Optional: Three.js (for advanced animation effects)
-- Optional: Anime.js (for advanced animation effects)
+
+
+## Use Cases
+
+React-Dialogic is particularly well-suited for:
+
+- **Visual novels and interactive games**: Create character dialogues and storyline branches
+- **Tutorials and user onboarding**: Guide users through product features with character-driven tutorials
+- **Interactive storytelling**: Create engaging story experiences
+- **Character-driven user interfaces**: Personify your application interfaces
+- **Educational applications**: Build interactive learning content
+- **Customer service chat interfaces**: Develop personalized service chat interfaces
+- **Product showcases**: Present product features through dialogue
+
+## Support and Contribution
+
+- **Issue reporting**: Submit issues on the GitHub Issues page
+- **Feature requests**: Suggest new features
+- **Code contributions**: Submit Pull Requests following contribution guidelines
+- **Documentation improvements**: Help improve documentation
 
 </details>
 
-## License
+---
 
-MIT
+## 相關連結 Links
+
+- [NPM Package](https://www.npmjs.com/package/react-dialogic)
+- [GitHub Repository](https://github.com/marshal604/react-dialogic)
+- [Bug Report](https://github.com/marshal604/react-dialogic/issues)
+- [Documentation](https://marshal604.github.io/react-dialogic/docs)
